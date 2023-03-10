@@ -1,15 +1,18 @@
-#include "professor.h"
+#ifndef __ALUNOS_H_
+#define __ALUNOS_H_
 
 typedef struct{
   int dia;
   int mes;
   int ano;
-} Data;
+}Data;
 
-typedef struct{
+typedef struct {
   char name[50];
   int matricula;
   char sex;
-  int cpf;
+  char cpf[15];
   Data dataBirth;
-}Professor;
+}Aluno;
+
+#endif

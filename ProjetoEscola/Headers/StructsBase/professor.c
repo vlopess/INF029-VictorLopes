@@ -1,11 +1,10 @@
-#ifndef __ALUNOS_H_
-#define __ALUNOS_H_
+#include "professor.h"
 
 // typedef struct{
 //   int dia;
 //   int mes;
 //   int ano;
-// }Data;
+// } Data;
 
 // typedef struct{
 //   char name[50];
@@ -13,6 +12,4 @@
 //   char sex;
 //   int cpf;
 //   Data dataBirth;
-// }Aluno;
-
-#endif
+// }Professor;
