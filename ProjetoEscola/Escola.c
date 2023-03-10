@@ -1,4 +1,3 @@
-#include "Headers/aluno.h"
 #include <stdio.h>
 #include<stdlib.h>
 
@@ -7,11 +6,25 @@
 
 int lista_Alunos[TAM];
 
+typedef struct data {
+  int dia;
+  int mes;
+  int ano;
+} Data;
+
+typedef struct ficha_de_alunos {
+  char name[50];
+  int matricula;
+  char sex;
+  char cpf[15];
+  Data dataBirth;
+} Aluno;
+
 typedef struct ficha_de_professores {
   char name[50];
   int matricula;
   char sex;
-  int cpf;
+  char cpf[15];
   Data dataBirth;
 } Professores;
 
@@ -37,13 +50,16 @@ int main(void) {
   printf("===[0] Sair\n");
   printf("===[1] Inserir Aluno\n");
   printf("===[2] Excluir Aluno\n");
-  printf("===[3] Listar Aluno\n");
-  printf("===[4] Inserir Professor\n");
-  printf("===[5] Excluir Professor\n");
-  printf("===[6] Listar Professor\n");
-  printf("===[7] Inserir Disciplina\n");
-  printf("===[8] Excluir Disciplina\n");
-  printf("===[9] Listar Disciplina\n");
+  printf("===[3] Atualizar Aluno\n");
+  printf("===[4] Listar Aluno\n");
+  printf("===[5] Inserir Professor\n");
+  printf("===[6] Atualizar Professor\n");
+  printf("===[7] Excluir Professor\n");
+  printf("===[8] Listar Professor\n");
+  printf("===[9] Inserir Disciplina\n");
+  printf("===[10] Atualizar Disciplina\n");
+  printf("===[11] Excluir Disciplina\n");
+  printf("===[12] Listar Disciplina\n");
   printf("== :");
   scanf("%d", &option);
   switch(option){
@@ -68,7 +84,7 @@ int main(void) {
           aluno[isFullA].sex = getchar();
           getchar();          
           printf("CPF do aluno: ");
-          scanf("%d",&aluno[isFullA].cpf);
+          fgets(aluno[isFullA].cpf, 15, stdin);
           printf("Data de nascimento dd MM AAAA: ");
           scanf("%d%d%d", &aluno[isFullA].dataBirth.dia,&aluno[isFullA].dataBirth.mes, &aluno[isFullA].dataBirth.ano);
           isFullA++;          
@@ -80,11 +96,54 @@ int main(void) {
         break;
       }
       case 2:{
-        printf("===[2] Excluir Aluno\n");
-        getchar();
+        int e, j;
+        printf("\n================ALUNOS=================\n");
+        for(i = 0; i < isFullA ; i++){
+          fflush(stdin);          
+          printf("%d  Nome: %s, %d\n", i, aluno[i].name, aluno[i].matricula);
+        }
+        printf("\n=======================================\n");
+        printf("Digite a posicao do Aluno que deseja excluir: ");
+        scanf("%d", &e);
+        for(j=e; j<isFullA; j++){
+          for(i = 0; aluno[j].name[i] != '\0' || aluno[j + 1].name[i] != '\0'; i++){
+            aluno[j].name[i] = aluno[j + 1].name[i];
+          }
+          aluno[j].name[i] = '\0';
+        }
+        isFullA--;
         break;
       }
       case 3:{
+        int a;
+        printf("\n================ALUNOS=================\n");
+        for(i = 0; i < isFullA ; i++){
+          fflush(stdin);          
+          printf("%d  Nome: %s, %d\n", i, aluno[i].name, aluno[i].matricula);
+        }
+        printf("\n=======================================\n");
+        printf("Digite a posicao do Aluno que deseja atualizar: ");
+        scanf("%d", &a);
+         system("clear");
+          printf("====================================\n");
+          printf("===========Atualizar ALUNO=========\n");
+          printf("====================================\n");
+          printf("Nome do aluno: ");
+          getchar();
+          fgets(aluno[a].name, 50, stdin);          
+          printf("Numero de matricula: ");
+          scanf("%d", &aluno[a].matricula);
+          getchar();
+          printf("Sexo do aluno [M/F]: ");
+          aluno[a].sex = getchar();
+          getchar();          
+          printf("CPF do aluno: ");
+          fgets(aluno[a].cpf, 15, stdin);
+          printf("Data de nascimento dd MM AAAA: ");
+          scanf("%d%d%d", &aluno[a].dataBirth.dia,&aluno[a].dataBirth.mes, &aluno[a].dataBirth.ano);
+      break;
+      }
+      case 4:{
         if(isFullA == 0){
           printf("\nSem alunos matriculados\n");
           break;
@@ -95,14 +154,14 @@ int main(void) {
           printf("Nome: %s", aluno[i].name);
           printf("Matricula: %d\n", aluno[i].matricula);
           printf("Sexo: %c\n", aluno[i].sex);
-          printf("CPF: %d\n", aluno[i].cpf);
+          printf("CPF: %s\n", aluno[i].cpf);
           printf("Data de Nascimento: %d/%d/%d\n", aluno[i].dataBirth.dia,aluno[i].dataBirth.mes, aluno[i].dataBirth.ano);
           printf("\n==========================================\n");         
         }
         getchar();
         break;
       }
-      case 4:{
+      case 5:{
         if(isFullP != TAM){
           system("clear");
           printf("====================================\n");
@@ -116,9 +175,9 @@ int main(void) {
           getchar();
           printf("Sexo do professor [M/F]: ");
           professores[isFullP].sex = getchar();
-          getchar();          
+          getchar();
           printf("CPF do professor: ");
-          scanf("%d",&professores[isFullP].cpf);
+          fgets(professores[isFullP].cpf, 15, stdin);
           printf("Data de nascimento dd MM AAAA: ");
           scanf("%d%d%d", &professores[isFullP].dataBirth.dia,&professores[isFullP].dataBirth.mes, &professores[isFullP].dataBirth.ano);
           isFullP++;          
@@ -129,12 +188,36 @@ int main(void) {
         }
         break;
       }
-      case 5:{
-        printf("===[5] Inserir Disciplina\n");
-        getchar();
-        break;
-      }
       case 6:{
+        int a;
+        printf("\n================PROFESSORES=================\n");
+        for(i = 0; i < isFullP ; i++){
+          fflush(stdin);          
+          printf("%d  Nome: %s, %d\n", i, professores[i].name, professores[i].matricula);
+        }
+        printf("\n=======================================\n");
+        printf("Digite a posicao do Professor que deseja atualizar: ");
+        scanf("%d", &a);
+         system("clear");
+          printf("====================================\n");
+          printf("===========Atualizar Professor=========\n");
+          printf("====================================\n");
+          printf("Nome do Professor: ");
+          getchar();
+          fgets(professores[a].name, 50, stdin);          
+          printf("Numero de matricula: ");
+          scanf("%d", &professores[a].matricula);
+          getchar();
+          printf("Sexo do Professor [M/F]: ");
+          professores[a].sex = getchar();
+          getchar();
+          printf("CPF do Professor: ");
+          fgets(professores[a].cpf, 15, stdin);
+          printf("Data de nascimento dd MM AAAA: ");
+          scanf("%d%d%d", &professores[a].dataBirth.dia,&professores[a].dataBirth.mes, &professores[a].dataBirth.ano);
+      break;
+      }
+      case 7:{
         if(isFullP == 0){
           printf("\nSem professor matriculados\n");
           break;
@@ -145,14 +228,14 @@ int main(void) {
           printf("Nome: %s", professores[i].name);
           printf("Matricula: %d\n", professores[i].matricula);
           printf("Sexo: %c\n", professores[i].sex);
-          printf("CPF: %d\n", professores[i].cpf);
+          printf("CPF: %s\n", professores[i].cpf);
           printf("Data de Nascimento: %d/%d/%d\n", professores[i].dataBirth.dia,professores[i].dataBirth.mes, professores[i].dataBirth.ano);
           printf("\n==========================================\n");         
         }
         getchar();
         break;
       }
-      case 7:{
+      case 8:{
         if(isFullD != TAM){
           system("clear");
           printf("====================================\n");
@@ -175,10 +258,10 @@ int main(void) {
         }
         break;
       }
-      case 8:{
+      case 9:{
       break;
       }
-      case 9:{
+      case 10:{
         if(isFullD == 0){
           printf("\nSem professor matriculados\n");
           break;
@@ -194,6 +277,12 @@ int main(void) {
         }
         getchar();
         break;
+      }
+      case 11:{
+        break;
+      }
+      case 12:{
+          break;
       }
     }
   }
