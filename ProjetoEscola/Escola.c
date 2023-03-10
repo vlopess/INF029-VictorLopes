@@ -18,8 +18,7 @@ int main(void) {
 
   while (option) {
     // system("clear");
-    menu_geral();
-    scanf("%d", &option);
+    int option = menu_geral();
     switch (option) {
     case 0: {
       system("clear");
