@@ -1,13 +1,12 @@
-#ifndef __MENUD_H_
-#define __MENUD_H_
-
 #include <stdio.h>
-
+#include "MenuDisciplina.h"
+#include "MenuGeral.h"
+#include "../StructsBase/disciplina.h"
 
 int menu_disciplina() {
   int option;
   printf("\n====================================\n");
-  printf("===============ALUNO================\n");
+  printf("===============DISCIPLINA============\n");
   printf("====================================\n");
   printf("===[0] Voltar\\                  ===\n");
   printf("===[1] Inserir Disciplina\\       ===\n");
@@ -16,7 +15,26 @@ int menu_disciplina() {
   printf("===[4] Listar Disciplina\\        ===\n");
   printf("===: ");
   scanf("%d", &option);
-  return option;
-}
+  switch(option){
+    case 0:{
+      menu_geral();
+      break;
+    }
+    case 1:{
 
-#endif
+      break;
+    }
+    case 2:{
+
+      break;
+    }
+    case 3:{
+
+      break;
+    }
+    case 4:{
+
+      break;
+    }
+  }
+}

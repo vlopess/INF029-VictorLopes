@@ -1,10 +1,10 @@
-#ifndef __MENUA_H_
-#define __MENUA_H_
-
 #include <stdio.h>
+#include <stdlib.h>
+#include "MenuAluno.h"
+#include "MenuGeral.h"
+#include "../StructsBase/aluno.h"
 
-
-int menu_aluno() {
+void menu_aluno() {
   int option;
   printf("\n====================================\n");
   printf("===============ALUNO================\n");
@@ -16,7 +16,35 @@ int menu_aluno() {
   printf("===[4] Listar Aluno\\            ===\n");
   printf("===: ");
   scanf("%d", &option);
-  return option;
+  switch(option){
+    case 0:{
+      system("clear");
+      menu_geral();
+      break;
+    }
+    case 1:{
+      system("clear");
+      InserirAluno();
+      menu_aluno();
+      break;
+    }
+    case 2:{
+      system("clear");
+      ExcluirAluno();
+      menu_aluno();
+      break;
+    }
+    case 3:{
+      system("clear");
+      AtualizarAluno();
+      menu_aluno();
+      break;
+    }
+    case 4:{
+      system("clear");
+      ListarAluno();
+      menu_aluno();
+      break;
+    }
+  }
 }
-
-#endif

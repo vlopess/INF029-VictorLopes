@@ -15,4 +15,9 @@ typedef struct {
   Data dataBirth;
 }Aluno;
 
+void InserirAluno();
+void ExcluirAluno();
+void AtualizarAluno();
+void ListarAluno();
+
 #endif

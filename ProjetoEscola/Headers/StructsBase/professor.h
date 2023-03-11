@@ -12,4 +12,9 @@ typedef struct{
   Data dataBirth;
 }Professor;
 
+void InserirProfessor();
+void ExcluirProfessor();
+void AtualizarProfessor();
+void ListarProfessor();
+
 #endif

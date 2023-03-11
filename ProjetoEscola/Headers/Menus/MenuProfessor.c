@@ -1,13 +1,12 @@
-#ifndef __MENUP_H_
-#define __MENUP_H_
-
 #include <stdio.h>
-
+#include "MenuProfessor.h"
+#include "MenuGeral.h"
+#include "../StructsBase/professor.h"
 
 int menu_professor() {
   int option;
   printf("\n====================================\n");
-  printf("===============ALUNO================\n");
+  printf("===============PROFESSOR=============\n");
   printf("====================================\n");
   printf("===[0] Voltar\\                  ===\n");
   printf("===[1] Inserir Professor\\       ===\n");
@@ -16,7 +15,26 @@ int menu_professor() {
   printf("===[4] Listar Professor\\        ===\n");
   printf("===: ");
   scanf("%d", &option);
-  return option;
-}
+  switch(option){
+    case 0:{
+      menu_geral();
+      break;
+    }
+    case 1:{
 
-#endif
+      break;
+    }
+    case 2:{
+
+      break;
+    }
+    case 3:{
+
+      break;
+    }
+    case 4:{
+
+      break;
+    }
+  }
+}
