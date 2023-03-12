@@ -15,9 +15,12 @@ typedef struct {
   Data dataBirth;
 }Aluno;
 
+#define TAM 3
+
 void InserirAluno();
 void ExcluirAluno();
 void AtualizarAluno();
 void ListarAluno();
+int Isfull();
 
 #endif

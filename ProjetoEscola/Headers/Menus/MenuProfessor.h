@@ -2,6 +2,6 @@
 #define __MENUP_H_
 
 
-int menu_professor();
+void menu_professor();
 
 #endif

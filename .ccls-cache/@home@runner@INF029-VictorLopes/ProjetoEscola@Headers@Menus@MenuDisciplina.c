@@ -1,40 +1,61 @@
-#include <stdio.h>
 #include "MenuDisciplina.h"
-#include "MenuGeral.h"
 #include "../StructsBase/disciplina.h"
+#include "MenuGeral.h"
+#include "MenuRelatorios/DisciplinasR.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 int menu_disciplina() {
-  int option;
-  printf("\n====================================\n");
-  printf("===============DISCIPLINA============\n");
-  printf("====================================\n");
-  printf("===[0] Voltar\\                  ===\n");
-  printf("===[1] Inserir Disciplina\\       ===\n");
-  printf("===[2] Excluir Disciplina\\       ===\n");
-  printf("===[3] Atualizar Disciplina\\     ===\n");
-  printf("===[4] Listar Disciplina\\        ===\n");
-  printf("===: ");
-  scanf("%d", &option);
-  switch(option){
-    case 0:{
+  int option = 1;
+
+  do {
+    system("clear");
+    puts("====================================");
+    puts("===============DISCIPLINA===========");
+    puts("====================================");
+    puts("===[0] Voltar                    ===");
+    puts("===[1] Inserir Disciplina        ===");
+    puts("===[2] Excluir Disciplina        ===");
+    puts("===[3] Atualizar Disciplina      ===");
+    puts("===[4] Inserir Aluno na Disciplina==");
+    puts("===[5] Listar Disciplina         ===");
+    puts("===[6] Listar Disciplina com Alunos=");
+    puts("===[7] Relatorios Disciplina     ===");
+    printf("===: ");
+    scanf("%d", &option);
+    switch (option) {
+    case 0: {
       menu_geral();
       break;
     }
-    case 1:{
-
+    case 1: {
+      InserirDisciplina();
       break;
     }
-    case 2:{
-
+    case 2: {
+      ExcluirDisciplina();
       break;
     }
-    case 3:{
-
+    case 3: {
+      AtualizarDisciplina();
       break;
     }
-    case 4:{
-
+    case 4: {
+      InserirAlunoNaDisciplina();
       break;
     }
-  }
+    case 5: {
+      ListarDisciplina();
+      break;
+    }
+    case 6: {
+      ListarDisciplinaComAlunos();
+      break;
+    }
+    case 7: {
+      menu_relatoriosDisciplina();
+      break;
+    }
+    }
+  } while (option);
 }

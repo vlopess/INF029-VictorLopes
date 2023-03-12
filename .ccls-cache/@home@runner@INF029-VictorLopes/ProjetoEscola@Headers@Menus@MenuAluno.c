@@ -1,50 +1,51 @@
+#include "MenuAluno.h"
+#include "../StructsBase/aluno.h"
+#include "MenuGeral.h"
+#include "MenuRelatorios/AlunoR.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include "MenuAluno.h"
-#include "MenuGeral.h"
-#include "../StructsBase/aluno.h"
 
 void menu_aluno() {
-  int option;
-  printf("\n====================================\n");
-  printf("===============ALUNO================\n");
-  printf("====================================\n");
-  printf("===[0] Voltar\\                  ===\n");
-  printf("===[1] Inserir Aluno\\           ===\n");
-  printf("===[2] Excluir Aluno\\           ===\n");
-  printf("===[3] Atualizar Aluno\\         ===\n");
-  printf("===[4] Listar Aluno\\            ===\n");
-  printf("===: ");
-  scanf("%d", &option);
-  switch(option){
-    case 0:{
-      system("clear");
-      menu_geral();
-      break;
+  int option;  ;
+
+  do {
+    system("clear");
+    puts("====================================");
+    puts("===============ALUNO================");
+    puts("====================================");
+    puts("===[0] Voltar                    ===");
+    puts("===[1] Inserir Aluno             ===");
+    puts("===[2] Excluir Aluno             ===");
+    puts("===[3] Atualizar Aluno           ===");
+    puts("===[4] Listar Aluno              ===");
+    puts("===[5] Relatorios Aluno          ===");
+    printf("===: ");
+    scanf("%d", &option);
+    switch (option) {
+      case 0: {
+        menu_geral();
+        break;
+      }
+      case 1: {
+        InserirAluno();
+        break;
+      }
+      case 2: {
+        ExcluirAluno();
+        break;
+      }
+      case 3: {
+        AtualizarAluno();
+        break;
+      }
+      case 4: {
+        ListarAluno();
+        break;
+      }
+      case 5: {
+        menu_relatoriosAluno();
+        break;
+      }
     }
-    case 1:{
-      system("clear");
-      InserirAluno();
-      menu_aluno();
-      break;
-    }
-    case 2:{
-      system("clear");
-      ExcluirAluno();
-      menu_aluno();
-      break;
-    }
-    case 3:{
-      system("clear");
-      AtualizarAluno();
-      menu_aluno();
-      break;
-    }
-    case 4:{
-      system("clear");
-      ListarAluno();
-      menu_aluno();
-      break;
-    }
-  }
+  }while (option);
 }

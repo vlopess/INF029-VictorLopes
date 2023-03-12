@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "ProfessorR.h"
 
-int menu_relatoriosProfessor() {
+void menu_relatoriosProfessor() {
   int option;
   printf("\n=======================================\n");
   printf("============Professor/RELATORIOS=============\n");
@@ -12,5 +12,4 @@ int menu_relatoriosProfessor() {
   printf("===[3] Listar Professores por data de nascimento ===\n");
   printf("===: ");
   scanf("%d", &option);
-  return option;
 }

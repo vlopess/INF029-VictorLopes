@@ -1,6 +1,6 @@
 #ifndef __MENURA_H_
 #define __MENURA_H_
 
-int menu_relatoriosAluno();
+void menu_relatoriosAluno();
 
 #endif

@@ -1,7 +1,8 @@
 #include <stdio.h>
+#include "AlunoR.h"
 
 
-int menu_relatoriosAluno() {
+void menu_relatoriosAluno() {
   int option;
   printf("\n======================================================\n");
   printf("============ALUNO/RELATORIOS============================\n");

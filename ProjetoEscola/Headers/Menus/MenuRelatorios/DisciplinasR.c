@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "DisciplinasR.h"
 
-int menu_relatoriosDisciplina() {
+void menu_relatoriosDisciplina() {
   int option;
   printf("\n================================================\n");
   printf("================Disciplina/RELATORIOS=============\n");
