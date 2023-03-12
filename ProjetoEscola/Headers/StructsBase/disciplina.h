@@ -9,6 +9,7 @@ typedef struct {
   char semestre[20];
   char professor[50];
   Aluno ListAluno[3];
+  int QuantAluno;
 } Disciplinas;
 
 
@@ -18,6 +19,7 @@ void AtualizarDisciplina();
 void ListarDisciplina();
 void ListarDisciplinaComAlunos();
 void InserirAlunoNaDisciplina();
-void ExcluirAlunoNaDisciplina();
+void ExcluirAlunoDaDisciplina();
+void IniciarTamanho();
 
 #endif

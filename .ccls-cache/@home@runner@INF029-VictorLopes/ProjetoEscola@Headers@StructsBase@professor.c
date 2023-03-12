@@ -3,9 +3,9 @@
 #include <stdlib.h>
 
 #define TAM 3
-
-Professor professores[TAM];
 int isFullP = 0;
+Professor professores[TAM];
+
 
 void InserirProfessor() {
   int voltar;

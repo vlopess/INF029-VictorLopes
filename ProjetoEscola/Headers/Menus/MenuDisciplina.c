@@ -18,14 +18,13 @@ int menu_disciplina() {
     puts("===[2] Excluir Disciplina        ===");
     puts("===[3] Atualizar Disciplina      ===");
     puts("===[4] Inserir Aluno na Disciplina==");
-    puts("===[5] Listar Disciplina         ===");
-    puts("===[6] Listar Disciplina com Alunos=");
+    puts("===[5] Excluir Aluno da Disciplina==");
+    puts("===[6] Listar Disciplina         ===");
     puts("===[7] Relatorios Disciplina     ===");
     printf("===: ");
     scanf("%d", &option);
     switch (option) {
     case 0: {
-      menu_geral();
       break;
     }
     case 1: {
@@ -45,15 +44,15 @@ int menu_disciplina() {
       break;
     }
     case 5: {
-      ListarDisciplina();
+      ExcluirAlunoDaDisciplina();
       break;
     }
     case 6: {
-      ListarDisciplinaComAlunos();
+      ListarDisciplina();
       break;
     }
     case 7: {
-      menu_relatoriosDisciplina();
+      menu_relatoriosDisciplina();    
       break;
     }
     }

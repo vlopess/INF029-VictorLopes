@@ -16,5 +16,6 @@ void InserirProfessor();
 void ExcluirProfessor();
 void AtualizarProfessor();
 void ListarProfessor();
+void ListarProfessorPorSexo();
 
 #endif

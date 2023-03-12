@@ -1,15 +1,36 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "ProfessorR.h"
+#include "../../StructsBase/professor.h"
 
 void menu_relatoriosProfessor() {
   int option;
-  printf("\n=======================================\n");
-  printf("============Professor/RELATORIOS=============\n");
-  printf("=========================================\n");
-  printf("===[0] Voltar\\                                  ===\n");
-  printf("===[1] Listar Professores por sexo               ===\n");
-  printf("===[2] Listar Professores por ordem alfabetica   ===\n");
-  printf("===[3] Listar Professores por data de nascimento ===\n");
+  system("clear");
+  puts("====================================================");
+  puts("============Professor/RELATORIOS====================");
+  puts("====================================================");
+  puts("===[0] Voltar                                    ===");
+  puts("===[1] Listar Professores por sexo               ===");
+  puts("===[2] Listar Professores por ordem alfabetica   ===");
+  puts("===[3] Listar Professores por data de nascimento ===");
   printf("===: ");
   scanf("%d", &option);
+  switch(option){
+    case 0:{
+      break;
+    }
+    case 1:{
+      ListarProfessorPorSexo();
+      break;
+    }
+    case 2:{
+      break;
+    }
+    case 3:{
+      break;
+    }
+    case 4:{
+      break;
+    }
+  }
 }

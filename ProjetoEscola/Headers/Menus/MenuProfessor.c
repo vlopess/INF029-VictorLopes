@@ -24,7 +24,6 @@ void menu_professor() {
     scanf("%d", &option);
     switch (option) {
       case 0: {
-        menu_geral();
         break;
       }
       case 1: {

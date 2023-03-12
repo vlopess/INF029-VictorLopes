@@ -3,10 +3,11 @@
 #include "MenuProfessor.h"
 #include "../StructsBase/professor.h"
 #include "MenuGeral.h"
+#include "MenuRelatorios/ProfessorR.h"
 
 
 void menu_professor() {
-  int option = 1;
+  int option;
 
   do {
     system("clear");
@@ -23,7 +24,6 @@ void menu_professor() {
     scanf("%d", &option);
     switch (option) {
       case 0: {
-        menu_geral();
         break;
       }
       case 1: {
@@ -40,6 +40,10 @@ void menu_professor() {
       }
       case 4: {
         ListarProfessor();
+        break;
+      }
+      case 5: {
+        menu_relatoriosProfessor();
         break;
       }
     }

@@ -2,6 +2,7 @@
 #include "MenuAluno.h"
 #include "MenuDisciplina.h"
 #include "MenuProfessor.h"
+#include "MenuRelatorios/Relatorios.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -42,6 +43,7 @@ void menu_geral(void) {
       }
       case 4: {
         system("clear");
+        menu_relatorios();
         break;
       }
     }
