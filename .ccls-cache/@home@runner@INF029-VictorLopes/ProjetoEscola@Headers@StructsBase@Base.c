@@ -9,7 +9,8 @@
 
 // Por ainda não entender em sua totalidade a modularizaçõa e a transferencência
 // de dados entre arquivos em c, acabei optando em deixar todas as structs no
-// mesmo arquivo para não gerar erros, mas tentei separar e organizar até onde eu consigo.
+// mesmo arquivo para não gerar erros, mas tentei separar e organizar até onde
+// eu consigo.
 
 int isFullA = 0;
 Aluno aluno[TAM];
@@ -21,37 +22,48 @@ void IniciarTamanho();
 int isFullP = 0;
 Professor professores[TAM];
 
+int ValidarData(int ano, int mes, int dia);
+int ValidarMatricula(int matricula, int limite);
+int ValidarCPF(char cpf[]);
+
 // Funções do Aluno======================================
 
 void InserirAluno() {
   int voltar;
 
   if (isFullA != TAM) {
-    system("clear");
-    printf("====================================\n");
-    printf("===========MATRICULAR ALUNO=========\n");
-    printf("====================================\n");
-    printf("Nome do aluno: ");
-    getchar();
-    fgets(aluno[isFullA].name, 50, stdin);
-    size_t ln = strlen(aluno[isFullA].name) - 1;
-    if (aluno[isFullA].name[ln] == '\n')
-      aluno[isFullA].name[ln] = '\0';
-    printf("Numero de matricula: ");
-    scanf("%d", &aluno[isFullA].matricula);
-    getchar();
-    printf("Sexo do aluno [M/F]: ");
-    aluno[isFullA].sex = getchar();
-    getchar();
-    printf("CPF do aluno: ");
-    fgets(aluno[isFullA].cpf, 15, stdin);
-    ln = strlen(aluno[isFullA].cpf) - 1;
-    if (aluno[isFullA].cpf[ln] == '\n')
-      aluno[isFullA].cpf[ln] = '\0';
-    printf("Data de nascimento dd MM AAAA: ");
-    scanf("%d%d%d", &aluno[isFullA].dataBirth.dia,
-          &aluno[isFullA].dataBirth.mes, &aluno[isFullA].dataBirth.ano);
+    int error;
+    do {
+      system("clear");
+      printf("====================================\n");
+      printf("===========MATRICULAR ALUNO=========\n");
+      printf("====================================\n");
+      printf("Nome do aluno: ");
+      getchar();
+      fgets(aluno[isFullA].name, 50, stdin);
+      size_t ln = strlen(aluno[isFullA].name) - 1;
+      if (aluno[isFullA].name[ln] == '\n')
+        aluno[isFullA].name[ln] = '\0';      
+      printf("Numero de matricula: ");
+      scanf("%d", &aluno[isFullA].matricula);
+      getchar();
+      error = ValidarMatricula(aluno[isFullA].matricula);
+      printf("Sexo do aluno [M/F]: ");
+      aluno[isFullA].sex = getchar();
+      getchar();
+      printf("CPF do aluno: ");
+      fgets(aluno[isFullA].cpf, 15, stdin);
+      ln = strlen(aluno[isFullA].cpf) - 1;
+      if (aluno[isFullA].cpf[ln] == '\n')
+        aluno[isFullA].cpf[ln] = '\0';
+      error = ValidarCPF(aluno[isFullA].cpf);
+      printf("Data de nascimento dd MM AAAA: ");
+      scanf("%d%d%d", &aluno[isFullA].dataBirth.dia,
+            &aluno[isFullA].dataBirth.mes, &aluno[isFullA].dataBirth.ano);
+      error = ValidarData(aluno[isFullA].dataBirth.ano, aluno[isFullA].dataBirth.mes, aluno[isFullA].dataBirth.dia);
+    } while (error);
     isFullA++;
+    aluno[isFullA].QuantDisc++;
     puts("==[1] Voltar");
     scanf("%d", &voltar);
   } else {
@@ -645,6 +657,9 @@ void IniciarTamanho() {
   for (i = 0; i < TAM; i++) {
     disciplinas[i].QuantAluno = 0;
   }
+  for (i = 0; i < TAM; i++) {
+    aluno[i].QuantDisc = 0;
+  }
 }
 
 // Funções do Professor======================================
@@ -872,4 +887,38 @@ void ListarProfessorPorOrdemAlfabetico() {
   puts("=================================");
   puts("==[1] Voltar");
   scanf("%d", &voltar);
+}
+
+// VALIDAÇÕES===========================================================================================================
+
+int ValidarData(int ano, int mes, int dia) {
+  if ((dia > 31 || dia < 0) || (mes > 12 || mes < 0) || ano < 0) {
+    printf("ERRO : DATA INVALIDA");
+    return 0;
+  }
+  return 1;
+}
+
+int ValidarMatricula(int matricula, int limite) {
+  int i;
+  if (matricula < 0) {
+    printf("Numero de matricula invalida");
+    return 0;
+  }
+  for (i = 0; i < limite; i++) {
+    if (aluno[i].matricula == matricula ||
+        professores[i].matricula == matricula) {
+      printf("Numero de matricula ja existente");
+      return 0;
+    }
+  }
+  return 1;
+}
+
+int ValidarCPF(char cpf[]) {
+  if (strlen(cpf) != 14 || cpf[3] != '.' || cpf[7] != '.' || cpf[11] != '-') {
+    printf("CPF no formato errado");
+    return 0;
+  }
+  return 1;
 }

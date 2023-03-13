@@ -13,6 +13,7 @@ typedef struct {
   char sex;
   char cpf[15];
   Data dataBirth;
+  int QuantDisc;
 }Aluno;
 
 void InserirAluno();
