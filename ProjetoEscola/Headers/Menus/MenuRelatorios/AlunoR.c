@@ -26,6 +26,7 @@ void menu_relatoriosAluno() {
       break;
     }
     case 2:{
+      ListarAlunoPorOrdemAlfabetico();
       break;
     }
     case 3:{

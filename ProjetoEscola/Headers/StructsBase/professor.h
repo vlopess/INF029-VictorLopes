@@ -17,5 +17,7 @@ void ExcluirProfessor();
 void AtualizarProfessor();
 void ListarProfessor();
 void ListarProfessorPorSexo();
+void ListarProfessorPorOrdemAlfabetico();
+
 
 #endif

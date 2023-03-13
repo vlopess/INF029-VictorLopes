@@ -23,6 +23,7 @@ void menu_relatorios(){
       break;
     }
     case 2:{
+      Buscar()
       break;
     }
   }

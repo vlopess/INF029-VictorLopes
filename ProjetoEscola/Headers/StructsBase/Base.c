@@ -9,7 +9,7 @@
 
 // Por ainda não entender em sua totalidade a modularizaçõa e a transferencência
 // de dados entre arquivos em c, acabei optando em deixar todas as structs no
-// mesmo arquivo para não gerar erros.
+// mesmo arquivo para não gerar erros, mas tentei separar e organizar até onde eu consigo.
 
 int isFullA = 0;
 Aluno aluno[TAM];
@@ -45,7 +45,7 @@ void InserirAluno() {
     getchar();
     printf("CPF do aluno: ");
     fgets(aluno[isFullA].cpf, 15, stdin);
-    size_t ln = strlen(aluno[isFullA].cpf) - 1;
+    ln = strlen(aluno[isFullA].cpf) - 1;
     if (aluno[isFullA].cpf[ln] == '\n')
       aluno[isFullA].cpf[ln] = '\0';
     printf("Data de nascimento dd MM AAAA: ");
@@ -129,9 +129,9 @@ void AtualizarAluno() {
     printf("Nome do aluno: ");
     getchar();
     fgets(aluno[a].name, 50, stdin);
-    size_t ln = strlen(aluno[a].nome) - 1;
-    if (aluno[a].nome[ln] == '\n')
-      aluno[a].nome[ln] = '\0';
+    size_t ln = strlen(aluno[a].name) - 1;
+    if (aluno[a].name[ln] == '\n')
+      aluno[a].name[ln] = '\0';
     printf("Numero de matricula: ");
     scanf("%d", &aluno[a].matricula);
     getchar();
@@ -140,7 +140,7 @@ void AtualizarAluno() {
     getchar();
     printf("CPF do aluno: ");
     fgets(aluno[a].cpf, 15, stdin);
-    size_t ln = strlen(aluno[a].cpf) - 1;
+    ln = strlen(aluno[a].cpf) - 1;
     if (aluno[a].cpf[ln] == '\n')
       aluno[a].cpf[ln] = '\0';
     printf("Data de nascimento dd MM AAAA: ");
@@ -161,7 +161,7 @@ void ListarAluno() {
     system("clear");
     puts("==============LISTA DE ALUNOS==========");
     for (i = 0; i < isFullA; i++) {
-      printf("Nome: %s", aluno[i].name);
+      printf("Nome: %s\n", aluno[i].name);
       printf("Matricula: %d\n", aluno[i].matricula);
       printf("Sexo: %c\n", aluno[i].sex);
       printf("CPF: %s\n", aluno[i].cpf);
@@ -230,20 +230,96 @@ void Aniversariantes() {
 }
 void Buscar() {
   char busca[50];
-  int voltar;
-  printf("Digite a string de busca");
+  int voltar, c, i, j, a, l;
+  printf("Digite a string de busca:");
+  getchar();
   fgets(busca, 50, stdin);
   size_t ln = strlen(busca) - 1;
-  if(busca[ln] == '\n'){
+  if (busca[ln] == '\n') {
     busca[ln] = '\0';
   }
-  if(strlen(busca) > 3){
-    
-  }else{
-    printf("String muito pequena");    
-    puts("==[1] Voltar");
-    scanf("%d", &voltar);
+  if (strlen(busca) >= 3) {
+    for (i = 0; i < isFullA; i++) {
+      for (c = 0; aluno[i].name[c] != '\0'; c++) {
+        if (busca[0] == aluno[i].name[c]) {
+          for (j = c + 1, a = 1, l = 1; a < strlen(busca); j++, a++) {
+            if (busca[a] == aluno[i].name[j])
+              l++;
+            else
+              break;
+          }
+          if (strlen(busca) == l) {
+            printf("%s\n", aluno[i].name);
+          }
+        }
+      }
+    }
+    for (i = 0; i < isFullP; i++) {
+      for (c = 0, a = 1; aluno[i].name[c] != '\0'; c++) {
+        if (busca[0] == professores[i].name[c]) {
+          for (j = c + 1, a = 1, l = 1; a < strlen(busca); j++, a++) {
+            if (busca[j] == professores[i].name[a])
+              l++;
+            else
+              break;
+          }
+          if (strlen(busca) == l) {
+            printf("%s\n", professores[i].name);
+          }
+        }
+      }
+    }
+  } else {
+    printf("String muito pequena");
   }
+  puts("=================================");
+  puts("==[1] Voltar");
+  scanf("%d", &voltar);
+}
+void ListarAlunoPorOrdemAlfabetico() {
+  int c, j, i, k, voltar;
+  char ordenadoAluno[TAM][50];
+  char aux[50];
+
+  if (isFullA == 0) {
+    puts("Lista de Alunos vazia");
+
+  } else {
+    for (c = 0; c < isFullA; c++) {
+      for (i = 0; aluno[c].name[i] != '\0'; i++) {
+        ordenadoAluno[c][i] = aluno[c].name[i];
+      }
+      ordenadoAluno[c][i] = '\0';
+    }
+    for (c = 0; c < isFullA - 1; c++) {
+      for (j = c + 1; j < isFullA; j++) {
+        i = 0;
+        while (ordenadoAluno[c][i] == ordenadoAluno[j][i] &&
+               ordenadoAluno[c][i] != '\0')
+          i++;
+        if (ordenadoAluno[c][i] - ordenadoAluno[j][i] > 0) {
+          for (k = 0; ordenadoAluno[j][k] != '\0'; k++) {
+            aux[k] = ordenadoAluno[c][k];
+          }
+          aux[k] = '\0';
+          for (k = 0; ordenadoAluno[j][k] != '\0'; k++) {
+            ordenadoAluno[c][k] = ordenadoAluno[j][k];
+          }
+          ordenadoAluno[c][k] = '\0';
+          for (k = 0; aux[k] != '\0'; k++) {
+            ordenadoAluno[j][k] = aux[k];
+          }
+          ordenadoAluno[j][k] = '\0';
+        }
+      }
+    }
+    for (c = 0; c < isFullA; c++) {
+      printf("%s\n", ordenadoAluno[c]);
+    }
+  }
+  puts("=================================");
+  puts("==[1] Voltar");
+  scanf("%d", &voltar);
 }
 
 // Funções da Disciplina======================================
@@ -266,12 +342,12 @@ void InserirDisciplina() {
     getchar();
     printf("Semestre da disciplina: ");
     fgets(disciplinas[isFullD].semestre, 20, stdin);
-    size_t ln = strlen(disciplinas[isFullD].semestre) - 1;
+    ln = strlen(disciplinas[isFullD].semestre) - 1;
     if (disciplinas[isFullD].semestre[ln] == '\n')
       disciplinas[isFullD].semestre[ln] = '\0';
     printf("Professor da disciplina: ");
     fgets(disciplinas[isFullD].professor, 50, stdin);
-    size_t ln = strlen(disciplinas[isFullD].professor) - 1;
+    ln = strlen(disciplinas[isFullD].professor) - 1;
     if (disciplinas[isFullD].professor[ln] == '\n')
       disciplinas[isFullD].professor[ln] = '\0';
     isFullD++;
@@ -365,12 +441,12 @@ void AtualizarDisciplina() {
     getchar();
     printf("Professor da Disciplina:");
     fgets(disciplinas[a].professor, 50, stdin);
-    size_t ln = strlen(disciplinas[a].professor) - 1;
+    ln = strlen(disciplinas[a].professor) - 1;
     if (disciplinas[a].professor[ln] == '\n')
       disciplinas[a].professor[ln] = '\0';
     printf("Semestre da Disciplina:");
     fgets(disciplinas[a].semestre, 50, stdin);
-    size_t ln = strlen(disciplinas[a].semestre) - 1;
+    ln = strlen(disciplinas[a].semestre) - 1;
     if (disciplinas[a].semestre[ln] == '\n')
       disciplinas[a].semestre[ln] = '\0';
     puts("==[1] Voltar");
@@ -389,7 +465,7 @@ void ListarDisciplina() {
     for (i = 0; i < isFullD; i++) {
       fflush(stdin);
       printf("\n==========================================\n");
-      printf("Nome: %s", disciplinas[i].name);
+      printf("Nome: %s\n", disciplinas[i].name);
       printf("Codigo: %d\n", disciplinas[i].codigo);
       printf("Semestre: %s", disciplinas[i].semestre);
       printf("Professor: %s", disciplinas[i].professor);
@@ -538,7 +614,7 @@ void ListarDisciplinaComAlunos() {
     printf("\n==========================================\n");
     for (i = 0; i < isFullD; i++) {
       fflush(stdin);
-      printf("Nome: %s", disciplinas[i].name);
+      printf("Nome: %s\n", disciplinas[i].name);
       printf("Codigo: %d\n", disciplinas[i].codigo);
       printf("Semestre: %s", disciplinas[i].semestre);
       printf("Professor: %s", disciplinas[i].professor);
@@ -594,7 +670,7 @@ void InserirProfessor() {
     getchar();
     printf("CPF do professor: ");
     fgets(professores[isFullP].cpf, 15, stdin);
-    size_t ln = strlen(professores[isFullP].cpf) - 1;
+    ln = strlen(professores[isFullP].cpf) - 1;
     if (professores[isFullP].cpf[ln] == '\n')
       professores[isFullP].cpf[ln] = '\0';
     printf("Data de nascimento dd MM AAAA: ");
@@ -695,7 +771,7 @@ void AtualizarProfessor() {
     getchar();
     printf("CPF do Professor: ");
     fgets(professores[a].cpf, 15, stdin);
-    size_t ln = strlen(professores[a].cpf) - 1;
+    ln = strlen(professores[a].cpf) - 1;
     if (professores[a].cpf[ln] == '\n')
       professores[a].cpf[ln] = '\0';
     printf("Data de nascimento dd MM AAAA: ");
@@ -716,7 +792,7 @@ void ListarProfessor() {
     for (i = 0; i < isFullP; i++) {
       fflush(stdin);
       printf("\n==========================================\n");
-      printf("Nome: %s", professores[i].name);
+      printf("Nome: %s\n", professores[i].name);
       printf("Matricula: %d\n", professores[i].matricula);
       printf("Sexo: %c\n", professores[i].sex);
       printf("CPF: %s\n", professores[i].cpf);
@@ -751,4 +827,49 @@ void ListarProfessorPorSexo() {
     puts("==[1] Voltar");
     scanf("%d", &voltar);
   }
+}
+
+void ListarProfessorPorOrdemAlfabetico() {
+  int c, j, i, k, voltar;
+  char ordenadoProfessores[TAM][50];
+  char aux[50];
+
+  if (isFullP == 0) {
+    puts("Sem Professores matriculados");
+  } else {
+    for (c = 0; c < isFullP; c++) {
+      for (i = 0; professores[c].name[i] != '\0'; i++) {
+        ordenadoProfessores[c][i] = professores[c].name[i];
+      }
+      ordenadoProfessores[c][i] = '\0';
+    }
+    for (c = 0; c < isFullP - 1; c++) {
+      for (j = c + 1; j < isFullP; j++) {
+        i = 0;
+        while (ordenadoProfessores[c][i] == ordenadoProfessores[j][i] &&
+               ordenadoProfessores[c][i] != '\0')
+          i++;
+        if (ordenadoProfessores[c][i] - ordenadoProfessores[j][i] > 0) {
+          for (k = 0; ordenadoProfessores[c][k] != '\0'; k++) {
+            aux[k] = ordenadoProfessores[c][k];
+          }
+          aux[k] = '\0';
+          for (k = 0; ordenadoProfessores[j][k] != '\0'; k++) {
+            ordenadoProfessores[c][k] = ordenadoProfessores[j][k];
+          }
+          ordenadoProfessores[c][k] = '\0';
+          for (k = 0; aux[k] != '\0'; k++) {
+            ordenadoProfessores[j][k] = aux[k];
+          }
+          ordenadoProfessores[j][k] = '\0';
+        }
+      }
+    }
+    for (c = 0; c < isFullP; c++) {
+      printf("%s\n", ordenadoProfessores[c]);
+    }
+  }
+  puts("=================================");
+  puts("==[1] Voltar");
+  scanf("%d", &voltar);
 }

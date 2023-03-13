@@ -24,6 +24,7 @@ void menu_relatoriosProfessor() {
       break;
     }
     case 2:{
+      ListarProfessorPorOrdemAlfabetico();
       break;
     }
     case 3:{

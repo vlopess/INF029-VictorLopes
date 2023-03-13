@@ -20,6 +20,7 @@ void ExcluirAluno();
 void AtualizarAluno();
 void ListarAluno();
 void ListarAlunoPorSexo();
+void ListarAlunoPorOrdemAlfabetico();
 void Aniversariantes();
 void Buscar();
 
