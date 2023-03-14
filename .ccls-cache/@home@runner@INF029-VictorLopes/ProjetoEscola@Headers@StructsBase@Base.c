@@ -1,18 +1,16 @@
-#include "aluno.h"
-#include "disciplina.h"
-#include "professor.h"
+#include "Base.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
 #define TAM 3
 
-    // Por ainda não entender em sua totalidade a modularizaçõa e a
-    // transferencência de dados entre arquivos em c, acabei optando em deixar
-    // todas as structs no mesmo arquivo para não gerar erros, mas tentei
-    // separar e organizar até onde eu consigo.
+// Por ainda não entender em sua totalidade a modularizaçõa e a
+// transferencência de dados entre arquivos em c, acabei optando em deixar
+// todas as structs no mesmo arquivo para não gerar erros, mas tentei
+// separar e organizar até onde eu consigo.
 
-    int isFullA = 0;
+int isFullA = 0;
 Aluno aluno[TAM];
 
 int isFullD = 0;
@@ -222,81 +220,6 @@ void ListarAlunoPorSexo() {
   }
 }
 
-void Aniversariantes() {
-  int mm, i, voltar, e = 1;
-  system("clear");
-  printf("Digite o mes mm: ");
-  scanf("%d", &mm);
-  puts("=======ANIVERSARIANTES DO MES=======");
-  for (i = 0; i < TAM; i++) {
-    if (aluno[i].dataBirth.mes == mm) {
-      printf("ALUNO: %s, %d/%d/%d", aluno[i].name, aluno[i].dataBirth.dia,
-             aluno[i].dataBirth.mes, aluno[i].dataBirth.ano);
-      e = 0;
-    }
-  }
-  for (i = 0; i < TAM; i++) {
-    if (professores[i].dataBirth.mes == mm) {
-      printf("PROFESSOR: %s, %d/%d/%d", professores[i].name,
-             professores[i].dataBirth.dia, professores[i].dataBirth.mes,
-             professores[i].dataBirth.ano);
-      e = 0;
-    }
-  }
-  if (e) {
-    puts("Nao ha nenhuma pessoa que faz aniversario deste mes");
-  }
-  puts("==[1] Voltar");
-  scanf("%d", &voltar);
-}
-void Buscar() {
-  char busca[50];
-  int voltar, c, i, j, a, l;
-  printf("Digite a string de busca:");
-  getchar();
-  fgets(busca, 50, stdin);
-  size_t ln = strlen(busca) - 1;
-  if (busca[ln] == '\n') {
-    busca[ln] = '\0';
-  }
-  if (strlen(busca) >= 3) {
-    for (i = 0; i < isFullA; i++) {
-      for (c = 0; aluno[i].name[c] != '\0'; c++) {
-        if (busca[0] == aluno[i].name[c]) {
-          for (j = c + 1, a = 1, l = 1; a < strlen(busca); j++, a++) {
-            if (busca[a] == aluno[i].name[j])
-              l++;
-            else
-              break;
-          }
-          if (strlen(busca) == l) {
-            printf("%s, aluno\n", aluno[i].name);
-          }
-        }
-      }
-    }
-    for (i = 0; i < isFullP; i++) {
-      for (c = 0, a = 1; aluno[i].name[c] != '\0'; c++) {
-        if (busca[0] == professores[i].name[c]) {
-          for (j = c + 1, a = 1, l = 1; a < strlen(busca); j++, a++) {
-            if (busca[j] == professores[i].name[a])
-              l++;
-            else
-              break;
-          }
-          if (strlen(busca) == l) {
-            printf("%s, professor\n", professores[i].name);
-          }
-        }
-      }
-    }
-  } else {
-    puts("String muito pequena");
-  }
-  puts("=================================");
-  puts("==[1] Voltar");
-  scanf("%d", &voltar);
-}
 void ListarAlunoPorOrdemAlfabetico() {
   int c, j, i, k, voltar, t;
   char ordenadoAluno[TAM][50];
@@ -941,4 +864,83 @@ int ValidarCPF(char cpf[]) {
     return 0;
   }
   return 1;
+}
+
+
+//=========================================================
+
+void Aniversariantes() {
+  int mm, i, voltar, e = 1;
+  system("clear");
+  printf("Digite o mes mm: ");
+  scanf("%d", &mm);
+  puts("=======ANIVERSARIANTES DO MES=======");
+  for (i = 0; i < TAM; i++) {
+    if (aluno[i].dataBirth.mes == mm) {
+      printf("ALUNO: %s, %d/%d/%d", aluno[i].name, aluno[i].dataBirth.dia,
+             aluno[i].dataBirth.mes, aluno[i].dataBirth.ano);
+      e = 0;
+    }
+  }
+  for (i = 0; i < TAM; i++) {
+    if (professores[i].dataBirth.mes == mm) {
+      printf("PROFESSOR: %s, %d/%d/%d", professores[i].name,
+             professores[i].dataBirth.dia, professores[i].dataBirth.mes,
+             professores[i].dataBirth.ano);
+      e = 0;
+    }
+  }
+  if (e) {
+    puts("Nao ha nenhuma pessoa que faz aniversario deste mes");
+  }
+  puts("==[1] Voltar");
+  scanf("%d", &voltar);
+}
+void Buscar() {
+  char busca[50];
+  int voltar, c, i, j, a, l;
+  printf("Digite a string de busca:");
+  getchar();
+  fgets(busca, 50, stdin);
+  size_t ln = strlen(busca) - 1;
+  if (busca[ln] == '\n') {
+    busca[ln] = '\0';
+  }
+  if (strlen(busca) >= 3) {
+    for (i = 0; i < isFullA; i++) {
+      for (c = 0; aluno[i].name[c] != '\0'; c++) {
+        if (busca[0] == aluno[i].name[c]) {
+          for (j = c + 1, a = 1, l = 1; a < strlen(busca); j++, a++) {
+            if (busca[a] == aluno[i].name[j])
+              l++;
+            else
+              break;
+          }
+          if (strlen(busca) == l) {
+            printf("%s, aluno\n", aluno[i].name);
+          }
+        }
+      }
+    }
+    for (i = 0; i < isFullP; i++) {
+      for (c = 0, a = 1; aluno[i].name[c] != '\0'; c++) {
+        if (busca[0] == professores[i].name[c]) {
+          for (j = c + 1, a = 1, l = 1; a < strlen(busca); j++, a++) {
+            if (busca[j] == professores[i].name[a])
+              l++;
+            else
+              break;
+          }
+          if (strlen(busca) == l) {
+            printf("%s, professor\n", professores[i].name);
+          }
+        }
+      }
+    }
+  } else {
+    puts("String muito pequena");
+  }
+  puts("=================================");
+  puts("==[1] Voltar");
+  scanf("%d", &voltar);
 }

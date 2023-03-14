@@ -3,23 +3,6 @@
 
 #include "aluno.h"
 
-typedef struct {
-  char name[50];
-  int codigo;
-  char semestre[20];
-  char professor[50];
-  Aluno ListAluno[3];
-  int QuantAluno;
-} Disciplinas;
 
-
-void InserirDisciplina();
-void ExcluirDisciplina();
-void AtualizarDisciplina();
-void ListarDisciplina();
-void ListarDisciplinaComAlunos();
-void InserirAlunoNaDisciplina();
-void ExcluirAlunoDaDisciplina();
-void IniciarTamanho();
 
 #endif
