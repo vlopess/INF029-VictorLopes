@@ -25,6 +25,8 @@ void AtualizarAluno();
 void ListarAluno();
 void ListarAlunoPorSexo();
 void ListarAlunoPorOrdemAlfabetico();
+void ListarAlunoPorOrdemNascimento();
+void ListarAlunoComMenosDeTresDisciplinas();
 
 //PROFESSOR===============================================
 
@@ -42,6 +44,7 @@ void AtualizarProfessor();
 void ListarProfessor();
 void ListarProfessorPorSexo();
 void ListarProfessorPorOrdemAlfabetico();
+void ListarProfesorPorOrdemNascimento();
 
 //DISCIPLINAS=================================================
 
@@ -60,6 +63,7 @@ void ExcluirDisciplina();
 void AtualizarDisciplina();
 void ListarDisciplina();
 void ListarDisciplinaComAlunos();
+void ListarDisciplinasComMaisDeQuarenta();
 void InserirAlunoNaDisciplina();
 void ExcluirAlunoDaDisciplina();
 void IniciarTamanho();

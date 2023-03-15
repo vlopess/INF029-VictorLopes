@@ -55,9 +55,7 @@ void menu_relatoriosProfessor() {
       break;
     }
     case 3:{
-      break;
-    }
-    case 4:{
+      ListarProfesorPorOrdemNascimento();
       break;
     }
   }
@@ -83,6 +81,7 @@ void menu_relatoriosDisciplina() {
       break;
     }
     case 2:{
+      ListarDisciplinasComMaisDeQuarenta();
       break;
     }
   }
@@ -116,9 +115,11 @@ void menu_relatoriosAluno() {
       break;
     }
     case 3: {
+      ListarAlunoPorOrdemNascimento();
       break;
     }
     case 4: {
+      ListarAlunoComMenosDeTresDisciplinas();
       break;
     }
     }
