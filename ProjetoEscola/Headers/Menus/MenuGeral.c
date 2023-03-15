@@ -51,9 +51,9 @@ void menu_geral(void) {
 
 void menu_professor() {
   int option;
-
+  system("clear");
   do {
-    system("clear");
+    
     puts("====================================");
     puts("===============PROFESSOR============");
     puts("====================================");
@@ -95,9 +95,9 @@ void menu_professor() {
 
 void menu_disciplina() {
   int option = 1;
-
+system("clear");
   do {
-    system("clear");
+    
     puts("====================================");
     puts("===============DISCIPLINA===========");
     puts("====================================");

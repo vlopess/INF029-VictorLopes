@@ -61,7 +61,7 @@ void InserirAluno() {
               ValidarData(aluno[isFullA].dataBirth.ano,
                           aluno[isFullA].dataBirth.mes,
                           aluno[isFullA].dataBirth.dia);
-    } while (!error);
+    } while (error);
     isFullA++;
     aluno[isFullA].QuantDisc++;
     puts("Aluno matriculado com sucesso!!!");
@@ -161,7 +161,7 @@ void AtualizarAluno() {
              ValidarCPF(aluno[a].cpf) +
              ValidarData(aluno[a].dataBirth.ano, aluno[a].dataBirth.mes,
                          aluno[a].dataBirth.dia);
-    } while (!erro);
+    } while (erro);
     puts("Aluno atualizado com sucesso!!");
   }
   puts("==[1] Voltar");
@@ -370,7 +370,7 @@ void InserirDisciplina() {
       if (disciplinas[isFullD].professor[ln] == '\n')
         disciplinas[isFullD].professor[ln] = '\0';
       erro = ValidarMatricula(disciplinas[isFullD].codigo, isFullA, isFullP);
-    } while (!erro);
+    } while (erro);
     isFullD++;
     puts("Disciplina cadastrada com sucesso!!");
   } else {
@@ -467,7 +467,7 @@ void AtualizarDisciplina() {
       if (disciplinas[a].semestre[ln] == '\n')
         disciplinas[a].semestre[ln] = '\0';
       erro = ValidarMatricula(disciplinas[isFullD].codigo, isFullA, isFullP);
-    } while (!erro);
+    } while (erro);
   }
   puts("==[1] Voltar");
   scanf("%d", &voltar);
@@ -484,8 +484,8 @@ void ListarDisciplina() {
       printf("\n==========================================\n");
       printf("Nome: %s\n", disciplinas[i].name);
       printf("Codigo: %d\n", disciplinas[i].codigo);
-      printf("Semestre: %s", disciplinas[i].semestre);
-      printf("Professor: %s", disciplinas[i].professor);
+      printf("Semestre: %s\n", disciplinas[i].semestre);
+      printf("Professor: %s\n", disciplinas[i].professor);
       printf("\n==========================================\n");
     }
   }
@@ -539,10 +539,9 @@ void InserirAlunoNaDisciplina() {
           aluno[a].dataBirth.mes;
       disciplinas[d].ListAluno[disciplinas[d].QuantAluno].dataBirth.ano =
           aluno[a].dataBirth.ano;
+      disciplinas[d].QuantAluno++;
     }
-    disciplinas[d].QuantAluno++;
   }
-
   puts("==[1] Voltar");
   scanf("%d", &voltar);
 }
@@ -624,14 +623,14 @@ void ListarDisciplinaComAlunos() {
       fflush(stdin);
       printf("Nome: %s\n", disciplinas[i].name);
       printf("Codigo: %d\n", disciplinas[i].codigo);
-      printf("Semestre: %s", disciplinas[i].semestre);
-      printf("Professor: %s", disciplinas[i].professor);
+      printf("Semestre: %s\n", disciplinas[i].semestre);
+      printf("Professor: %s\n", disciplinas[i].professor);
       puts("=========ALUNOS==============================");
       if (disciplinas[i].QuantAluno == 0) {
-        printf("Sem alunos matriculados");
+        puts("Sem alunos matriculados");
       } else {
         for (j = 0; j < disciplinas[i].QuantAluno; j++) {
-          printf("Nome: %s", disciplinas[i].ListAluno[j].name);
+          printf("Nome: %s\n", disciplinas[i].ListAluno[j].name);
           printf("Matricula: %d\n", disciplinas[i].ListAluno[j].matricula);
           printf("Sexo: %c\n", disciplinas[i].ListAluno[j].sex);
           printf("CPF: %s\n", disciplinas[i].ListAluno[j].cpf);
@@ -671,13 +670,14 @@ void ListarDisciplinasComMaisDeQuarenta() {
         printf("\n==========================================\n");
         printf("Nome: %s\n", disciplinas[i].name);
         printf("Codigo: %d\n", disciplinas[i].codigo);
-        printf("Semestre: %s", disciplinas[i].semestre);
-        printf("Professor: %s", disciplinas[i].professor);
+        printf("Semestre: %s\n", disciplinas[i].semestre);
+        printf("Professor: %s\n", disciplinas[i].professor);
         printf("\n==========================================\n");
       }
     }
-    if (a)
-      puts("Nao ha disciplinas com mais de 40 alunos");
+  }
+  if (a) {
+    puts("Nao ha disciplinas com mais de 40 alunos");
   }
   puts("==[1] Voltar");
   scanf("%d", &voltar);
@@ -721,9 +721,10 @@ void InserirProfessor() {
           ValidarData(professores[isFullP].dataBirth.ano,
                       professores[isFullP].dataBirth.mes,
                       professores[isFullP].dataBirth.dia);
-    } while (erro != 3);
+    } while (erro);
 
     isFullP++;
+    puts("Professor matriculado com sucesso!!!");
   } else {
     printf("\nLista esta cheia\n");
   }
@@ -824,7 +825,7 @@ void AtualizarProfessor() {
              ValidarData(professores[a].dataBirth.ano,
                          professores[a].dataBirth.mes,
                          professores[a].dataBirth.dia);
-    } while (!erro);
+    } while (erro);
   }
   puts("==[1] Voltar");
   scanf("%d", &voltar);
@@ -837,6 +838,7 @@ void ListarProfessor() {
   } else {
     for (i = 0; i < isFullP; i++) {
       fflush(stdin);
+      system("clear");
       printf("\n==========================================\n");
       printf("Nome: %s\n", professores[i].name);
       printf("Matricula: %d\n", professores[i].matricula);
@@ -923,7 +925,7 @@ void ListarProfesorPorOrdemNascimento() {
   char auxNome[50];
   Data data[TAM];
   Data auxData;
-  int c, j, k, i;
+  int c, j, k, i, voltar;
 
   for (c = 0; c < isFullP; c++) {
     for (i = 0; professores[c].name[i] != '\0'; i++) {
@@ -974,6 +976,9 @@ void ListarProfesorPorOrdemNascimento() {
     printf("%s, %d/%d/%d\n", ProfeNome[c], data[c].dia, data[c].mes,
            data[c].ano);
   }
+  puts("=================================");
+  puts("==[1] Voltar");
+  scanf("%d", &voltar);
 }
 
 // VALIDAÇÔES ==============================================
@@ -990,18 +995,18 @@ int ValidarData(int ano, int mes, int dia) {
 int ValidarMatricula(int matricula, int limite, int limite2) {
   int i;
   if (matricula < 0) {
-    puts("Numero de matricula invalida");
+    puts("ERRO : NUMERO DE MATRICULA/CODIGO INVALIDO");
     return 1;
   }
   for (i = 0; i < limite; i++) {
     if (aluno[i].matricula == matricula) {
-      puts("Numero ja existente");
+      puts("ERRO : NUMERO DE MATRICULA/CODIGO JA EXISTENTE");
       return 1;
     }
   }
   for (i = 0; i < limite2; i++) {
     if (professores[i].matricula == matricula) {
-      puts("Numero ja existente");
+      puts("ERRO : NUMERO DE MATRICULA/CODIGO JA EXISTENTE");
       return 1;
     }
   }
@@ -1010,7 +1015,7 @@ int ValidarMatricula(int matricula, int limite, int limite2) {
 
 int ValidarCPF(char cpf[]) {
   if (strlen(cpf) != 14 || cpf[3] != '.' || cpf[7] != '.' || cpf[11] != '-') {
-    puts("CPF no formato errado");
+    puts("ERRO : CPF NO FORMATO INVALIDO");
     return 1;
   }
   return 0;

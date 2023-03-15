@@ -1,12 +1,12 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include "Relatorios.h"
 #include "../../StructsBase/Base.h"
+#include <stdio.h>
+#include <stdlib.h>
 
-
-void menu_relatorios(){
+void menu_relatorios() {
   int option;
   system("clear");
+  do{
   puts("==================================================");
   puts("============RELATORIOS============================");
   puts("==================================================");
@@ -15,24 +15,26 @@ void menu_relatorios(){
   puts("===[2] Lista de Pessoas                        ===");
   printf("==: ");
   scanf("%d", &option);
-  switch(option){
-    case 0:{
+  switch (option) {
+    case 0: {
       break;
     }
-    case 1:{
+    case 1: {
       Aniversariantes();
       break;
     }
-    case 2:{
+    case 2: {
       Buscar();
       break;
     }
   }
+  } while (option);
 }
 
 void menu_relatoriosProfessor() {
   int option;
   system("clear");
+  do{
   puts("====================================================");
   puts("============Professor/RELATORIOS====================");
   puts("====================================================");
@@ -42,28 +44,30 @@ void menu_relatoriosProfessor() {
   puts("===[3] Listar Professores por data de nascimento ===");
   printf("===: ");
   scanf("%d", &option);
-  switch(option){
-    case 0:{
+  switch (option) {
+    case 0: {
       break;
     }
-    case 1:{
+    case 1: {
       ListarProfessorPorSexo();
       break;
     }
-    case 2:{
+    case 2: {
       ListarProfessorPorOrdemAlfabetico();
       break;
     }
-    case 3:{
+    case 3: {
       ListarProfesorPorOrdemNascimento();
       break;
     }
   }
+  } while (option);
 }
 
 void menu_relatoriosDisciplina() {
   int option;
   system("clear");
+  do{
   puts("==================================================");
   puts("==============Disciplina/RELATORIOS===============");
   puts("==================================================");
@@ -72,26 +76,27 @@ void menu_relatoriosDisciplina() {
   puts("===[2] Lista de disciplinas com + de 40 alunos ===");
   printf("==: ");
   scanf("%d", &option);
-  switch(option){
-    case 0:{
+  switch (option) {
+    case 0: {
       break;
     }
-    case 1:{
+    case 1: {
       ListarDisciplinaComAlunos();
       break;
     }
-    case 2:{
+    case 2: {
       ListarDisciplinasComMaisDeQuarenta();
       break;
     }
   }
+    } while (option);
 }
 
 void menu_relatoriosAluno() {
   int option;
-  system("clear");
 
   do {
+    system("clear");
     puts("========================================================");
     puts("============ALUNO/RELATORIOS============================");
     puts("========================================================");
