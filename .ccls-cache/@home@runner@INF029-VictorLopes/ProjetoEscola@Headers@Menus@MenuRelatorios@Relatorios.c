@@ -33,8 +33,8 @@ void menu_relatorios() {
 
 void menu_relatoriosProfessor() {
   int option;
-  system("clear");
   do{
+  system("clear");
   puts("====================================================");
   puts("============Professor/RELATORIOS====================");
   puts("====================================================");

@@ -51,9 +51,8 @@ void menu_geral(void) {
 
 void menu_professor() {
   int option;
-  system("clear");
   do {
-    
+    system("clear");
     puts("====================================");
     puts("===============PROFESSOR============");
     puts("====================================");
@@ -70,22 +69,27 @@ void menu_professor() {
         break;
       }
       case 1: {
+        system("clear");
         InserirProfessor();
         break;
       }
       case 2: {
+        system("clear");
         ExcluirProfessor();
         break;
       }
       case 3: {
+        system("clear");
         AtualizarProfessor();
         break;
       }
       case 4: {
+        system("clear");
         ListarProfessor();
         break;
       }
       case 5: {
+        system("clear");
         menu_relatoriosProfessor();
         break;
       }
@@ -95,9 +99,8 @@ void menu_professor() {
 
 void menu_disciplina() {
   int option = 1;
-system("clear");
   do {
-    
+    system("clear");
     puts("====================================");
     puts("===============DISCIPLINA===========");
     puts("====================================");
