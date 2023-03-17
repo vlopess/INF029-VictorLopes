@@ -21,7 +21,7 @@ int isFullP = 0;
 Professor professores[TAM];
 
 int ValidarData(int ano, int mes, int dia);
-int ValidarMatricula(int matricula, int limite, int limite2);
+int ValidarMatricula(int matricula, int limite, int q);
 int ValidarCPF(char cpf[]);
 
 // Funções do Aluno======================================
@@ -88,33 +88,38 @@ void ExcluirAluno() {
     printf("\n=======================================\n");
     printf("Digite a posicao do Aluno que deseja excluir: ");
     scanf("%d", &e);
-    for (j = e; j < isFullA - 1; j++) {
-      for (i = 0; aluno[j].name[i] != '\0' || aluno[j + 1].name[i] != '\0';
-           i++) {
-        aluno[j].name[i] = aluno[j + 1].name[i];
+    if (e >= 0 && e < isFullA) {
+      for (j = e; j < isFullA - 1; j++) {
+        for (i = 0; aluno[j].name[i] != '\0' || aluno[j + 1].name[i] != '\0';
+             i++) {
+          aluno[j].name[i] = aluno[j + 1].name[i];
+        }
+        aluno[j].name[i] = '\0';
       }
-      aluno[j].name[i] = '\0';
-    }
 
-    for (j = e; j < isFullA - 1; j++) {
-      aluno[j].matricula = aluno[j + 1].matricula;
-    }
-    for (j = e; j < isFullA - 1; j++) {
-      aluno[j].sex = aluno[j + 1].sex;
-    }
-    for (j = e; j < isFullA - 1; j++) {
-      for (i = 0; aluno[j].cpf[i] != '\0' || aluno[j + 1].cpf[i] != '\0'; i++) {
-        aluno[j].cpf[i] = aluno[j + 1].cpf[i];
+      for (j = e; j < isFullA - 1; j++) {
+        aluno[j].matricula = aluno[j + 1].matricula;
       }
-      aluno[j].cpf[i] = '\0';
+      for (j = e; j < isFullA - 1; j++) {
+        aluno[j].sex = aluno[j + 1].sex;
+      }
+      for (j = e; j < isFullA - 1; j++) {
+        for (i = 0; aluno[j].cpf[i] != '\0' || aluno[j + 1].cpf[i] != '\0';
+             i++) {
+          aluno[j].cpf[i] = aluno[j + 1].cpf[i];
+        }
+        aluno[j].cpf[i] = '\0';
+      }
+      for (j = e; j < isFullA - 1; j++) {
+        aluno[j].dataBirth.dia = aluno[j + 1].dataBirth.dia;
+        aluno[j].dataBirth.mes = aluno[j + 1].dataBirth.mes;
+        aluno[j].dataBirth.ano = aluno[j + 1].dataBirth.ano;
+      }
+      isFullA--;
+      puts("Aluno excluido com sucesso!!");
+    } else {
+      puts("Invalido");
     }
-    for (j = e; j < isFullA - 1; j++) {
-      aluno[j].dataBirth.dia = aluno[j + 1].dataBirth.dia;
-      aluno[j].dataBirth.mes = aluno[j + 1].dataBirth.mes;
-      aluno[j].dataBirth.ano = aluno[j + 1].dataBirth.ano;
-    }
-    isFullA--;
-    puts("Aluno excluido com sucesso!!");
     puts("==[1] Voltar");
     scanf("%d", &voltar);
   }
@@ -125,43 +130,47 @@ void AtualizarAluno() {
     puts("nao ha alunos matriculados");
   } else {
     system("clear");
-    do {
-      printf("\n================ALUNOS=================\n");
-      for (i = 0; i < isFullA; i++) {
-        fflush(stdin);
-        printf("%d  Nome: %s, %d\n", i, aluno[i].name, aluno[i].matricula);
-      }
-      printf("\n=======================================\n");
-      printf("Digite a posicao do Aluno que deseja atualizar: ");
-      scanf("%d", &a);
-      printf("====================================\n");
-      printf("===========Atualizar ALUNO=========\n");
-      printf("====================================\n");
-      printf("Nome do aluno: ");
-      getchar();
-      fgets(aluno[a].name, 50, stdin);
-      size_t ln = strlen(aluno[a].name) - 1;
-      if (aluno[a].name[ln] == '\n')
-        aluno[a].name[ln] = '\0';
-      printf("Numero de matricula: ");
-      scanf("%d", &aluno[a].matricula);
-      getchar();
-      printf("Sexo do aluno [M/F]: ");
-      aluno[a].sex = getchar();
-      getchar();
-      printf("CPF do aluno: ");
-      fgets(aluno[a].cpf, 15, stdin);
-      ln = strlen(aluno[a].cpf) - 1;
-      if (aluno[a].cpf[ln] == '\n')
-        aluno[a].cpf[ln] = '\0';
-      printf("Data de nascimento dd MM AAAA: ");
-      scanf("%d%d%d", &aluno[a].dataBirth.dia, &aluno[a].dataBirth.mes,
-            &aluno[a].dataBirth.ano);
-      erro = ValidarCPF(aluno[a].cpf) + ValidarData(aluno[a].dataBirth.ano,
-                                                    aluno[a].dataBirth.mes,
-                                                    aluno[a].dataBirth.dia);
-    } while (erro);
-    puts("Aluno atualizado com sucesso!!");
+    printf("\n================ALUNOS=================\n");
+    for (i = 0; i < isFullA; i++) {
+      fflush(stdin);
+      printf("%d  Nome: %s, %d\n", i, aluno[i].name, aluno[i].matricula);
+    }
+    printf("\n=======================================\n");
+    printf("Digite a posicao do Aluno que deseja atualizar: ");
+    scanf("%d", &a);
+    if (a >= 0 && a < isFullA) {
+      do {
+        printf("====================================\n");
+        printf("===========Atualizar ALUNO=========\n");
+        printf("====================================\n");
+        printf("Nome do aluno: ");
+        getchar();
+        fgets(aluno[a].name, 50, stdin);
+        size_t ln = strlen(aluno[a].name) - 1;
+        if (aluno[a].name[ln] == '\n')
+          aluno[a].name[ln] = '\0';
+        printf("Numero de matricula: ");
+        scanf("%d", &aluno[a].matricula);
+        getchar();
+        printf("Sexo do aluno [M/F]: ");
+        aluno[a].sex = getchar();
+        getchar();
+        printf("CPF do aluno: ");
+        fgets(aluno[a].cpf, 15, stdin);
+        ln = strlen(aluno[a].cpf) - 1;
+        if (aluno[a].cpf[ln] == '\n')
+          aluno[a].cpf[ln] = '\0';
+        printf("Data de nascimento dd MM AAAA: ");
+        scanf("%d%d%d", &aluno[a].dataBirth.dia, &aluno[a].dataBirth.mes,
+              &aluno[a].dataBirth.ano);
+        erro = ValidarCPF(aluno[a].cpf) + ValidarData(aluno[a].dataBirth.ano,
+                                                      aluno[a].dataBirth.mes,
+                                                      aluno[a].dataBirth.dia);
+      } while (erro);
+      puts("Aluno atualizado com sucesso!!");
+    } else {
+      puts("Invalido");
+    }
   }
   puts("==[1] Voltar");
   scanf("%d", &voltar);
@@ -401,54 +410,57 @@ void ExcluirDisciplina() {
     printf("\n=======================================\n");
     printf("Digite a posicao da Disciplina que deseja excluir: ");
     scanf("%d", &e);
-
-    for (j = e; j < isFullD - 1; j++) {
-      for (i = 0;
-           disciplinas[j].name[i] != '\0' || disciplinas[j + 1].name[i] != '\0';
-           i++) {
-        disciplinas[j].name[i] = disciplinas[j + 1].name[i];
+    if (e >= 0 && e < isFullD) {
+      for (j = e; j < isFullD - 1; j++) {
+        for (i = 0; disciplinas[j].name[i] != '\0' ||
+                    disciplinas[j + 1].name[i] != '\0';
+             i++) {
+          disciplinas[j].name[i] = disciplinas[j + 1].name[i];
+        }
+        disciplinas[j].name[i] = '\0';
       }
-      disciplinas[j].name[i] = '\0';
-    }
-    for (j = e; j < isFullD - 1; j++) {
-      for (i = 0; disciplinas[j].professor[i] != '\0' ||
-                  disciplinas[j + 1].professor[i] != '\0';
-           i++) {
-        disciplinas[j].professor[i] = disciplinas[j + 1].professor[i];
+      for (j = e; j < isFullD - 1; j++) {
+        for (i = 0; disciplinas[j].professor[i] != '\0' ||
+                    disciplinas[j + 1].professor[i] != '\0';
+             i++) {
+          disciplinas[j].professor[i] = disciplinas[j + 1].professor[i];
+        }
+        disciplinas[j].professor[i] = '\0';
       }
-      disciplinas[j].professor[i] = '\0';
-    }
-    for (j = e; j < isFullD - 1; j++) {
-      for (i = 0; disciplinas[j].semestre[i] != '\0' ||
-                  disciplinas[j + 1].semestre[i] != '\0';
-           i++) {
-        disciplinas[j].semestre[i] = disciplinas[j + 1].semestre[i];
+      for (j = e; j < isFullD - 1; j++) {
+        for (i = 0; disciplinas[j].semestre[i] != '\0' ||
+                    disciplinas[j + 1].semestre[i] != '\0';
+             i++) {
+          disciplinas[j].semestre[i] = disciplinas[j + 1].semestre[i];
+        }
+        disciplinas[j].semestre[i] = '\0';
       }
-      disciplinas[j].semestre[i] = '\0';
-    }
-    for (j = e; j < isFullD - 1; j++) {
-      disciplinas[j].codigo = disciplinas[j + 1].codigo;
-    }
-    for (j = e; j < isFullD; j++) {
-      disciplinas[j].QuantAluno = disciplinas[j + 1].QuantAluno;
-      for (i = 0; i < disciplinas[j].QuantAluno; j++) {
-        strcpy(disciplinas[j].ListAluno[i].name,
-               disciplinas[j + 1].ListAluno[i].name);
-        strcpy(disciplinas[j].ListAluno[i].cpf,
-               disciplinas[j + 1].ListAluno[i].cpf);
-        disciplinas[j].ListAluno[i].sex = disciplinas[j + 1].ListAluno[i].sex;
-        disciplinas[j].ListAluno[i].matricula =
-            disciplinas[j + 1].ListAluno[i].matricula;
-        disciplinas[j].ListAluno[i].dataBirth.dia =
-            disciplinas[j + 1].ListAluno[i].dataBirth.dia;
-        disciplinas[j].ListAluno[i].dataBirth.mes =
-            disciplinas[j + 1].ListAluno[i].dataBirth.mes;
-        disciplinas[j].ListAluno[i].dataBirth.ano =
-            disciplinas[j + 1].ListAluno[i].dataBirth.ano;
+      for (j = e; j < isFullD - 1; j++) {
+        disciplinas[j].codigo = disciplinas[j + 1].codigo;
       }
-      puts("Disciplina excluida com sucesso!!");
+      for (j = e; j < isFullD; j++) {
+        disciplinas[j].QuantAluno = disciplinas[j + 1].QuantAluno;
+        for (i = 0; i < disciplinas[j].QuantAluno; j++) {
+          strcpy(disciplinas[j].ListAluno[i].name,
+                 disciplinas[j + 1].ListAluno[i].name);
+          strcpy(disciplinas[j].ListAluno[i].cpf,
+                 disciplinas[j + 1].ListAluno[i].cpf);
+          disciplinas[j].ListAluno[i].sex = disciplinas[j + 1].ListAluno[i].sex;
+          disciplinas[j].ListAluno[i].matricula =
+              disciplinas[j + 1].ListAluno[i].matricula;
+          disciplinas[j].ListAluno[i].dataBirth.dia =
+              disciplinas[j + 1].ListAluno[i].dataBirth.dia;
+          disciplinas[j].ListAluno[i].dataBirth.mes =
+              disciplinas[j + 1].ListAluno[i].dataBirth.mes;
+          disciplinas[j].ListAluno[i].dataBirth.ano =
+              disciplinas[j + 1].ListAluno[i].dataBirth.ano;
+        }
+        puts("Disciplina excluida com sucesso!!");
+      }
+      isFullD--;
+    } else {
+      puts("Invalido");
     }
-    isFullD--;
   }
   puts("==[1] Voltar");
   scanf("%d", &voltar);
@@ -469,28 +481,32 @@ void AtualizarDisciplina() {
     printf("\n=======================================\n");
     printf("Digite a posicao do disciplinas que deseja atualizar: ");
     scanf("%d", &a);
-    printf("====================================\n");
-    printf("======Atualizar DISCIPLINAS=========\n");
-    printf("====================================\n");
-    printf("Nome da disciplina: ");
-    getchar();
-    fgets(disciplinas[a].name, 50, stdin);
-    size_t ln = strlen(disciplinas[isFullD].name) - 1;
-    if (disciplinas[isFullD].name[ln] == '\n')
-      disciplinas[isFullD].name[ln] = '\0';
-    printf("Codigo da disciplina: ");
-    scanf("%d", &disciplinas[a].codigo);
-    getchar();
-    printf("Professor da Disciplina:");
-    fgets(disciplinas[a].professor, 50, stdin);
-    ln = strlen(disciplinas[a].professor) - 1;
-    if (disciplinas[a].professor[ln] == '\n')
-      disciplinas[a].professor[ln] = '\0';
-    printf("Semestre da Disciplina:");
-    fgets(disciplinas[a].semestre, 50, stdin);
-    ln = strlen(disciplinas[a].semestre) - 1;
-    if (disciplinas[a].semestre[ln] == '\n')
-      disciplinas[a].semestre[ln] = '\0';
+    if (a >= 0 && a < isFullD) {
+      printf("====================================\n");
+      printf("======Atualizar DISCIPLINAS=========\n");
+      printf("====================================\n");
+      printf("Nome da disciplina: ");
+      getchar();
+      fgets(disciplinas[a].name, 50, stdin);
+      size_t ln = strlen(disciplinas[isFullD].name) - 1;
+      if (disciplinas[isFullD].name[ln] == '\n')
+        disciplinas[isFullD].name[ln] = '\0';
+      printf("Codigo da disciplina: ");
+      scanf("%d", &disciplinas[a].codigo);
+      getchar();
+      printf("Professor da Disciplina:");
+      fgets(disciplinas[a].professor, 50, stdin);
+      ln = strlen(disciplinas[a].professor) - 1;
+      if (disciplinas[a].professor[ln] == '\n')
+        disciplinas[a].professor[ln] = '\0';
+      printf("Semestre da Disciplina:");
+      fgets(disciplinas[a].semestre, 50, stdin);
+      ln = strlen(disciplinas[a].semestre) - 1;
+      if (disciplinas[a].semestre[ln] == '\n')
+        disciplinas[a].semestre[ln] = '\0';
+    } else {
+      puts("Invalido");
+    }
   }
   puts("==[1] Voltar");
   scanf("%d", &voltar);
@@ -774,35 +790,39 @@ void ExcluirProfessor() {
     printf("\n=======================================\n");
     printf("Digite a posicao do professor que deseja excluir: ");
     scanf("%d", &e);
-    for (j = e; j < isFullP - 1; j++) {
-      for (i = 0;
-           professores[j].name[i] != '\0' || professores[j + 1].name[i] != '\0';
-           i++) {
-        professores[j].name[i] = professores[j + 1].name[i];
+    if (e >= 0 && e < isFullP) {
+      for (j = e; j < isFullP - 1; j++) {
+        for (i = 0; professores[j].name[i] != '\0' ||
+                    professores[j + 1].name[i] != '\0';
+             i++) {
+          professores[j].name[i] = professores[j + 1].name[i];
+        }
+        professores[j].name[i] = '\0';
       }
-      professores[j].name[i] = '\0';
-    }
 
-    for (j = e; j < isFullP - 1; j++) {
-      professores[j].matricula = professores[j + 1].matricula;
-    }
-    for (j = e; j < isFullP - 1; j++) {
-      professores[j].sex = professores[j + 1].sex;
-    }
-    for (j = e; j < isFullP - 1; j++) {
-      for (i = 0;
-           professores[j].cpf[i] != '\0' || professores[j + 1].cpf[i] != '\0';
-           i++) {
-        professores[j].cpf[i] = professores[j + 1].cpf[i];
+      for (j = e; j < isFullP - 1; j++) {
+        professores[j].matricula = professores[j + 1].matricula;
       }
-      professores[j].cpf[i] = '\0';
+      for (j = e; j < isFullP - 1; j++) {
+        professores[j].sex = professores[j + 1].sex;
+      }
+      for (j = e; j < isFullP - 1; j++) {
+        for (i = 0;
+             professores[j].cpf[i] != '\0' || professores[j + 1].cpf[i] != '\0';
+             i++) {
+          professores[j].cpf[i] = professores[j + 1].cpf[i];
+        }
+        professores[j].cpf[i] = '\0';
+      }
+      for (j = e; j < isFullP - 1; j++) {
+        professores[j].dataBirth.dia = professores[j + 1].dataBirth.dia;
+        professores[j].dataBirth.mes = professores[j + 1].dataBirth.mes;
+        professores[j].dataBirth.ano = professores[j + 1].dataBirth.ano;
+      }
+      isFullP--;
+    } else {
+      puts("Invalido");
     }
-    for (j = e; j < isFullP - 1; j++) {
-      professores[j].dataBirth.dia = professores[j + 1].dataBirth.dia;
-      professores[j].dataBirth.mes = professores[j + 1].dataBirth.mes;
-      professores[j].dataBirth.ano = professores[j + 1].dataBirth.ano;
-    }
-    isFullP--;
   }
   puts("==[1] Voltar");
   scanf("%d", &voltar);
@@ -813,45 +833,48 @@ void AtualizarProfessor() {
   if (isFullP == 0) {
     puts("A lista de professores esta vazia");
   } else {
-    do {
-      printf("\n================PROFESSORES=================\n");
-      for (i = 0; i < isFullP; i++) {
-        fflush(stdin);
-        printf("%d  Nome: %s, %d\n", i, professores[i].name,
-               professores[i].matricula);
-      }
-      printf("\n=======================================\n");
-      printf("Digite a posicao do Professor que deseja atualizar: ");
-      scanf("%d", &a);
-      system("clear");
-      printf("====================================\n");
-      printf("===========Atualizar Professor=========\n");
-      printf("====================================\n");
-      printf("Nome do Professor: ");
-      getchar();
-      fgets(professores[a].name, 50, stdin);
-      size_t ln = strlen(professores[a].name) - 1;
-      if (professores[isFullP].name[ln] == '\n')
-        professores[isFullP].name[ln] = '\0';
-      printf("Numero de matricula: ");
-      scanf("%d", &professores[a].matricula);
-      getchar();
-      printf("Sexo do Professor [M/F]: ");
-      professores[a].sex = getchar();
-      getchar();
-      printf("CPF do Professor: ");
-      fgets(professores[a].cpf, 15, stdin);
-      ln = strlen(professores[a].cpf) - 1;
-      if (professores[a].cpf[ln] == '\n')
-        professores[a].cpf[ln] = '\0';
-      printf("Data de nascimento dd MM AAAA: ");
-      scanf("%d%d%d", &professores[a].dataBirth.dia,
-            &professores[a].dataBirth.mes, &professores[a].dataBirth.ano);
-      erro = ValidarCPF(professores[a].cpf) +
-             ValidarData(professores[a].dataBirth.ano,
-                         professores[a].dataBirth.mes,
-                         professores[a].dataBirth.dia);
-    } while (erro);
+    printf("\n================PROFESSORES=================\n");
+    for (i = 0; i < isFullP; i++) {
+      fflush(stdin);
+      printf("%d  Nome: %s, %d\n", i, professores[i].name,
+             professores[i].matricula);
+    }
+    printf("\n=======================================\n");
+    printf("Digite a posicao do Professor que deseja atualizar: ");
+    scanf("%d", &a);
+    if (a >= 0 && a < isFullP) {
+      do {
+        printf("====================================\n");
+        printf("===========Atualizar Professor=========\n");
+        printf("====================================\n");
+        printf("Nome do Professor: ");
+        getchar();
+        fgets(professores[a].name, 50, stdin);
+        size_t ln = strlen(professores[a].name) - 1;
+        if (professores[isFullP].name[ln] == '\n')
+          professores[isFullP].name[ln] = '\0';
+        printf("Numero de matricula: ");
+        scanf("%d", &professores[a].matricula);
+        getchar();
+        printf("Sexo do Professor [M/F]: ");
+        professores[a].sex = getchar();
+        getchar();
+        printf("CPF do Professor: ");
+        fgets(professores[a].cpf, 15, stdin);
+        ln = strlen(professores[a].cpf) - 1;
+        if (professores[a].cpf[ln] == '\n')
+          professores[a].cpf[ln] = '\0';
+        printf("Data de nascimento dd MM AAAA: ");
+        scanf("%d%d%d", &professores[a].dataBirth.dia,
+              &professores[a].dataBirth.mes, &professores[a].dataBirth.ano);
+        erro = ValidarCPF(professores[a].cpf) +
+               ValidarData(professores[a].dataBirth.ano,
+                           professores[a].dataBirth.mes,
+                           professores[a].dataBirth.dia);
+      } while (erro);
+    } else {
+      puts("Invalido");
+    }
   }
   puts("==[1] Voltar");
   scanf("%d", &voltar);
@@ -863,7 +886,7 @@ void ListarProfessor() {
     puts("Sem professor matriculados");
   } else {
     system("clear");
-    for (i = 0; i < isFullP; i++) {      
+    for (i = 0; i < isFullP; i++) {
       printf("\n==========================================\n");
       printf("Nome: %s\n", professores[i].name);
       printf("Matricula: %d\n", professores[i].matricula);
@@ -966,57 +989,8 @@ void ListarProfesorPorOrdemNascimento() {
     data[c].mes = professores[c].dataBirth.mes;
   }
 
-  for (c = 0; c < for (c = 0; c < isFullA; c++) {
-    for (i = 0; aluno[c].name[i] != '\0'; i++) {
-      AlunoNome[c][i] = aluno[c].name[i];
-    }
-    AlunoNome[c][i] = '\0';
-  }
-
-  for (c = 0; c < TAM; c++) {
-    data[c].ano = aluno[c].dataBirth.ano;
-    data[c].dia = aluno[c].dataBirth.dia;
-    data[c].mes = aluno[c].dataBirth.mes;
-  }
-
-  for (c = 0; c < isFullA - 1; c++) {
+  for (c = 0; c < isFullP - 1; c++) {
     for (j = c + 1; j < isFullP; j++) {
-      if ((data[c].ano > data[j].ano) ||
-          (data[c].ano == data[j].ano && data[c].mes > data[j].mes) ||
-          (data[c].ano == data[j].ano && data[c].mes == data[j].mes &&
-           data[c].dia > data[j].dia)) {
-        auxData.ano = data[j].ano;
-        auxData.mes = data[j].mes;
-        auxData.dia = data[j].dia;
-
-        data[j].ano = data[c].ano;
-        data[j].mes = data[c].mes;
-        data[j].dia = data[c].dia;
-
-        data[c].ano = auxData.ano;
-        data[c].mes = auxData.mes;
-        data[c].dia = auxData.dia;
-
-        for (k = 0; AlunoNome[c][k] != '\0'; k++) {
-          auxNome[k] = AlunoNome[c][k];
-        }
-        auxNome[k] = '\0';
-        for (k = 0; AlunoNome[j][k] != '\0'; k++) {
-          AlunoNome[c][k] = AlunoNome[j][k];
-        }
-        AlunoNome[c][k] = '\0';
-        for (k = 0; auxNome[k] != '\0'; k++) {
-          AlunoNome[j][k] = auxNome[k];
-        }
-        AlunoNome[j][k] = '\0';
-      }
-    }
-  }
-  for (c = 0; c < isFullA; c++) {
-    printf("%s, %d/%d/%d\n", AlunoNome[c], data[c].dia, data[c].mes,
-           data[c].ano);
-  } - 1; c++) {
-    for (j = c + 1; j < isFullA; j++) {
       if ((data[c].ano > data[j].ano) ||
           (data[c].ano == data[j].ano && data[c].mes > data[j].mes) ||
           (data[c].ano == data[j].ano && data[c].mes == data[j].mes &&
@@ -1052,6 +1026,7 @@ void ListarProfesorPorOrdemNascimento() {
     printf("%s, %d/%d/%d\n", ProfeNome[c], data[c].dia, data[c].mes,
            data[c].ano);
   }
+
   puts("=================================");
   puts("==[1] Voltar");
   scanf("%d", &voltar);
@@ -1077,21 +1052,21 @@ int ValidarMatricula(int matricula, int limite, int q) {
   if (q == 1) {
     for (i = 0; i < limite; i++) {
       if (aluno[i].matricula == matricula) {
-        puts("ERRO : NUMERO DE MATRICULA/CODIGO JA EXISTENTE");
+        puts("ERRO : NUMERO DE MATRICULA JA EXISTENTE");
         return 1;
       }
     }
   } else if (q == 2) {
     for (i = 0; i < limite; i++) {
       if (professores[i].matricula == matricula) {
-        puts("ERRO : NUMERO DE MATRICULA/CODIGO JA EXISTENTE");
+        puts("ERRO : NUMERO DE MATRICULA JA EXISTENTE");
         return 1;
       }
     }
   } else if (q == 3) {
     for (i = 0; i < limite; i++) {
       if (disciplinas[i].codigo == matricula) {
-        puts("ERRO : NUMERO DE MATRICULA/CODIGO JA EXISTENTE");
+        puts("ERRO : NUMERO DE CODIGO JA EXISTENTE");
         return 1;
       }
     }
