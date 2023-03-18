@@ -1,6 +1,7 @@
 #ifndef __BASE_H_
 #define __BASE_H_
-
+#define TAM_MAX_ALUNOS_POR_DISCIPLINA 5
+#define TAM_IDEAL_ALUNOS_POR_DISCIPLINA 3
 
 //ALUNOS=================================================
 
@@ -52,8 +53,8 @@ typedef struct {
   char name[50];
   int codigo;
   char semestre[20];
-  char professor[50];
-  Aluno ListAluno[3];
+  int matriculaProfessor;
+  int ListAluno[TAM_MAX_ALUNOS_POR_DISCIPLINA];
   int QuantAluno;
 } Disciplinas;
 
@@ -72,6 +73,6 @@ void IniciarTamanho();
 //============================================
 void Aniversariantes();
 void Buscar();
-
+int GerarCodigo();
 
 #endif
