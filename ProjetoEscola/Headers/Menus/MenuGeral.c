@@ -5,7 +5,7 @@
 #include "../StructsBase/Base.h"
 
 
-void menu_geral(void) {
+int menu_geral() {
   int option;
   do {
     system("clear");
@@ -19,37 +19,11 @@ void menu_geral(void) {
     puts("===[4] Relatorios                ===");
     printf("== :");
     scanf("%d", &option);
-    switch (option) {
-      case 0: {
-        system("clear");
-        printf("Saindo ...\n");
-        break;
-      }
-      case 1: {
-        system("clear");
-        menu_aluno();
-        break;
-      }
-      case 2: {
-        system("clear");
-        menu_professor();
-        break;
-      }
-      case 3: {
-        system("clear");
-        menu_disciplina();
-        break;
-      }
-      case 4: {
-        system("clear");
-        menu_relatorios();
-        break;
-      }
-    }
+    return option;
   }while (option);
 }
 
-void menu_professor() {
+int menu_professor() {
   int option;
   do {
     system("clear");
@@ -64,36 +38,12 @@ void menu_professor() {
     puts("===[5] Relatorios Professor      ===");
     printf("===: ");
     scanf("%d", &option);
-    switch (option) {
-      case 0: {
-        break;
-      }
-      case 1: {
-        InserirProfessor();
-        break;
-      }
-      case 2: {
-        ExcluirProfessor();
-        break;
-      }
-      case 3: {
-        AtualizarProfessor();
-        break;
-      }
-      case 4: {
-        ListarProfessor();
-        break;
-      }
-      case 5: {
-        menu_relatoriosProfessor();
-        break;
-      }
-    }
+    return option;
   }while (option);
 }
 
-void menu_disciplina() {
-  int option = 1;
+int menu_disciplina() {
+  int option;
   do {
     system("clear");
     puts("====================================");
@@ -109,46 +59,12 @@ void menu_disciplina() {
     puts("===[7] Relatorios Disciplina     ===");
     printf("===: ");
     scanf("%d", &option);
-    switch (option) {
-    case 0: {
-      break;
-    }
-    case 1: {
-      InserirDisciplina();
-      break;
-    }
-    case 2: {
-      ExcluirDisciplina();
-      break;
-    }
-    case 3: {
-      AtualizarDisciplina();
-      break;
-    }
-    case 4: {
-      InserirAlunoNaDisciplina();
-      break;
-    }
-    case 5: {
-      ExcluirAlunoDaDisciplina();
-      break;
-    }
-    case 6: {
-      ListarDisciplina();
-      break;
-    }
-    case 7: {
-      menu_relatoriosDisciplina();    
-      break;
-    }
-    }
+    return option;
   } while (option);
 }
 
-void menu_aluno() {
+int menu_aluno() {
   int option;  ;
-
-  do {
     system("clear");
     puts("====================================");
     puts("===============ALUNO================");
@@ -161,30 +77,5 @@ void menu_aluno() {
     puts("===[5] Relatorios Aluno          ===");
     printf("===: ");
     scanf("%d", &option);
-    switch (option) {
-      case 0: {
-        break;
-      }
-      case 1: {
-        InserirAluno();
-        break;
-      }
-      case 2: {
-        ExcluirAluno();
-        break;
-      }
-      case 3: {
-        AtualizarAluno();
-        break;
-      }
-      case 4: {
-        ListarAluno();
-        break;
-      }
-      case 5: {
-        menu_relatoriosAluno();
-        break;
-      }
-    }
-  }while (option);
+    return option;
 }

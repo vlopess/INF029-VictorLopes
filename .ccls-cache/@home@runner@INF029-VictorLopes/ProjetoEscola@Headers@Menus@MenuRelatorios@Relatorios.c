@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void menu_relatorios() {
+int menu_relatorios() {
   int option;
   system("clear");
   do{
@@ -15,23 +15,11 @@ void menu_relatorios() {
   puts("===[2] Lista de Pessoas                        ===");
   printf("==: ");
   scanf("%d", &option);
-  switch (option) {
-    case 0: {
-      break;
-    }
-    case 1: {
-      Aniversariantes();
-      break;
-    }
-    case 2: {
-      Buscar();
-      break;
-    }
-  }
+  return option;
   } while (option);
 }
 
-void menu_relatoriosProfessor() {
+int menu_relatoriosProfessor() {
   int option;
   do{
   system("clear");
@@ -44,27 +32,11 @@ void menu_relatoriosProfessor() {
   puts("===[3] Listar Professores por data de nascimento ===");
   printf("===: ");
   scanf("%d", &option);
-  switch (option) {
-    case 0: {
-      break;
-    }
-    case 1: {
-      ListarProfessorPorSexo();
-      break;
-    }
-    case 2: {
-      ListarProfessorPorOrdemAlfabetico();
-      break;
-    }
-    case 3: {
-      ListarProfesorPorOrdemNascimento();
-      break;
-    }
-  }
+  return option;
   } while (option);
 }
 
-void menu_relatoriosDisciplina() {
+int menu_relatoriosDisciplina() {
   int option;
   system("clear");
   do{
@@ -76,23 +48,11 @@ void menu_relatoriosDisciplina() {
   puts("===[2] Lista de disciplinas com + de 40 alunos ===");
   printf("==: ");
   scanf("%d", &option);
-  switch (option) {
-    case 0: {
-      break;
-    }
-    case 1: {
-      ListarDisciplinaComAlunos();
-      break;
-    }
-    case 2: {
-      ListarDisciplinasComMaisDeQuarenta();
-      break;
-    }
-  }
+  return option;
     } while (option);
 }
 
-void menu_relatoriosAluno() {
+int menu_relatoriosAluno() {
   int option;
 
   do {
@@ -107,26 +67,6 @@ void menu_relatoriosAluno() {
     puts("===[4] Lista de alunos matriculados em 3 disciplinas ===");
     printf("==: ");
     scanf("%d", &option);
-    switch (option) {
-    case 0: {
-      break;
-    }
-    case 1: {
-      ListarAlunoPorSexo();
-      break;
-    }
-    case 2: {
-      ListarAlunoPorOrdemAlfabetico();
-      break;
-    }
-    case 3: {
-      ListarAlunoPorOrdemNascimento();
-      break;
-    }
-    case 4: {
-      ListarAlunoComMenosDeTresDisciplinas();
-      break;
-    }
-    }
+    return option;
   } while (option);
 }

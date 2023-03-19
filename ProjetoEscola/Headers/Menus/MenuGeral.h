@@ -1,9 +1,9 @@
 #ifndef __MENUG_H_
 #define __MENUG_H_
 
-void menu_geral();
-void menu_professor();
-void menu_disciplina();
-void menu_aluno();
+int menu_geral();
+int menu_professor();
+int menu_disciplina();
+int menu_aluno();
 
 #endif

@@ -20,14 +20,14 @@ typedef struct {
   int QuantDisc;
 }Aluno;
 
-void InserirAluno();
-void ExcluirAluno();
-void AtualizarAluno();
-void ListarAluno();
-void ListarAlunoPorSexo();
-void ListarAlunoPorOrdemAlfabetico();
-void ListarAlunoPorOrdemNascimento();
-void ListarAlunoComMenosDeTresDisciplinas();
+void InserirAluno(int isFullA, Aluno aluno[]);
+void ExcluirAluno(int isFullA, Aluno aluno[]);
+void AtualizarAluno(int isFullA, Aluno aluno[]);
+void ListarAluno(int isFullA, Aluno aluno[]);
+void ListarAlunoPorSexo(int isFullA, Aluno aluno[]);
+void ListarAlunoPorOrdemAlfabetico(int isFullA, Aluno aluno[]);
+void ListarAlunoPorOrdemNascimento(int isFullA, Aluno aluno[]);
+void ListarAlunoComMenosDeTresDisciplinas(int isFullA, Aluno aluno[]);
 
 //PROFESSOR===============================================
 
@@ -39,13 +39,13 @@ typedef struct{
   Data dataBirth;
 }Professor;
 
-void InserirProfessor();
-void ExcluirProfessor();
-void AtualizarProfessor();
-void ListarProfessor();
-void ListarProfessorPorSexo();
-void ListarProfessorPorOrdemAlfabetico();
-void ListarProfesorPorOrdemNascimento();
+void InserirProfessor(int isFullP, Professor professores[]);
+void ExcluirProfessor(int isFullP, Professor professores[]);
+void AtualizarProfessor(int isFullP, Professor professores[]);
+void ListarProfessor(int isFullP, Professor professores[]);
+void ListarProfessorPorSexo(int isFullP, Professor professores[]);
+void ListarProfessorPorOrdemAlfabetico(int isFullP, Professor professores[]);
+void ListarProfessorPorOrdemNascimento(int isFullP, Professor professores[]);
 
 //DISCIPLINAS=================================================
 
@@ -59,20 +59,18 @@ typedef struct {
 } Disciplinas;
 
 
-void InserirDisciplina();
-void ExcluirDisciplina();
-void AtualizarDisciplina();
-void ListarDisciplina();
-void ListarDisciplinaComAlunos();
-void ListarDisciplinasComMaisDeQuarenta();
-void InserirAlunoNaDisciplina();
-void ExcluirAlunoDaDisciplina();
-void IniciarTamanho();
-
+void InserirDisciplina(int isFullP, int isFullD, Disciplinas disciplinas[], Professor professores[]);
+void ExcluirDisciplina(int isFullD, Disciplinas disciplinas[]);
+void AtualizarDisciplina(int isFullP, int isFullD, Disciplinas disciplinas[], Professor professor[]);
+void ListarDisciplina(int isFullD, Disciplinas disciplinas[], int isFullP, Professor professores[]);
+void ListarDisciplinaComAlunos(int isFullD, Disciplinas disciplinas[], int isFullA, Aluno aluno[], int isFullP, Professor professores[]);
+void ListarDisciplinasComMaisDeQuarenta(int isFullD, Disciplinas disciplinas[], int isFullP, Professor professores[]);
+void InserirAlunoNaDisciplina(int isFullD, Disciplinas disciplinas[], int isFullA, Aluno aluno[]);
+void ExcluirAlunoDaDisciplina(int isFullD, Disciplinas disciplinas[], int isFullA, Aluno aluno[]);
 
 //============================================
-void Aniversariantes();
-void Buscar();
+void Aniversariantes(int isFullA, Aluno aluno[], int isFullP, Professor professores[]);
+void Buscar(int isFullA, Aluno aluno[], int isFullP, Professor professores[]);
 int GerarCodigo();
 
 #endif
