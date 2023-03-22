@@ -6,6 +6,7 @@
 #include <stdlib.h>
 
 #define TAM 3
+#define SUCESS -1
 
 int main(void) {
 
@@ -20,141 +21,155 @@ int main(void) {
   int isFullP = 0;
   Professor professores[TAM];
 
-  int SubOption, option;
-  
+  int SubOption, option, RelaOption, retorno;
+
   do {
     option = menu_geral();
     switch (option) {
-        case 0: {
+      case 0: {
         system("clear");
         printf("Saindo ...\n");
         break;
-      }
-        case 1: {
-        do{
-        SubOption = menu_aluno();
-        switch (SubOption) {
-        case 0: {
-          break;
-        }
-        case 1: {
-          InserirAluno(isFullA, aluno);
-          if(isFullA != TAM){
-            aluno[isFullA].matricula = GerarCodigo();
-            aluno[isFullA].QuantDisc++;
-            isFullA++;
-          }
-          break;
-        }
-        case 2: {
-          ExcluirAluno(isFullA, aluno);
-          if(isFullA != 0){
-            isFullA--;  
-          }
-          break;
-        }
-        case 3: {
-          AtualizarAluno(isFullA, aluno);
-          break;
-        }
-        case 4: {
-          ListarAluno(isFullA, aluno);
-          break;
-        }
-        case 5: {
-          do{
-            option = menu_relatoriosAluno();
-            switch (option) {
+      } //sair do progrma
+      case 1: {
+        do {
+          SubOption = menu_aluno();
+          switch (SubOption) {
           case 0: {
             break;
           }
           case 1: {
-            ListarAlunoPorSexo(isFullA, aluno);
+            retorno = InserirAluno(isFullA, aluno);
+            if (retorno == SUCESS) {
+              aluno[isFullA].matricula = GerarCodigo();
+              aluno[isFullA].QuantDisc++;
+              isFullA++;            
+            }
             break;
           }
           case 2: {
-            ListarAlunoPorOrdemAlfabetico(isFullA, aluno);
+            retorno = ExcluirAluno(isFullA, aluno);
+            if (retorno == SUCESS) {
+              isFullA--;
+            }
             break;
           }
           case 3: {
-            ListarAlunoPorOrdemNascimento(isFullA, aluno);
+            AtualizarAluno(isFullA, aluno);
             break;
           }
           case 4: {
-            ListarAlunoComMenosDeTresDisciplinas(isFullA, aluno);
-            break;
-          }
-          }
-          }while(option);
-          break;
-        }
-        }
-          }while(SubOption);
-          break;
-        }
-        case 2: {
-          system("clear");
-          SubOption = menu_professor();
-          switch (option) {
-          case 0: {
-            break;
-          }
-          case 1: {
-            InserirProfessor(isFullP, professores);
-            isFullP++;
-            break;
-          }
-          case 2: {
-            ExcluirProfessor(isFullP, professores);
-            isFullP--;
-            break;
-          }
-          case 3: {
-            AtualizarProfessor(isFullP, professores);
-            break;
-          }
-          case 4: {
-            ListarProfessor(isFullP, professores);
+            ListarAluno(isFullA, aluno);
             break;
           }
           case 5: {
-            option = menu_relatoriosProfessor();
-            switch (option) {
+            do {
+              RelaOption = menu_relatoriosAluno();
+              switch (RelaOption) {
+                case 0: {
+                  break;
+                }
+                case 1: {
+                  ListarAlunoPorSexo(isFullA, aluno);
+                  break;
+                }
+                case 2: {
+                  ListarAlunoPorOrdemAlfabetico(isFullA, aluno);
+                  break;
+                }
+                case 3: {
+                  ListarAlunoPorOrdemNascimento(isFullA, aluno);
+                  break;
+                }
+                case 4: {
+                  ListarAlunoComMenosDeTresDisciplinas(isFullA, aluno);
+                  break;
+                }
+              }
+            } while (RelaOption);
+            break;
+          }
+          }
+        } while (SubOption);
+        break;
+      } // menu aluno
+      case 2: {
+        system("clear");
+        do {
+          SubOption = menu_professor();
+          switch (SubOption) {
             case 0: {
               break;
             }
             case 1: {
-              ListarProfessorPorSexo(isFullP, professores);
+              retorno = InserirProfessor(isFullP, professores);
+              if(retorno == SUCESS){
+                professores[isFullP].matricula = GerarCodigo(); 
+                isFullP++;              
+              }
               break;
             }
             case 2: {
-              ListarProfessorPorOrdemAlfabetico(isFullP, professores);
+              retorno = ExcluirProfessor(isFullP, professores);
+              if(retorno == SUCESS){
+                isFullP--;
+              }
               break;
             }
             case 3: {
-              ListarProfessorPorOrdemNascimento(isFullP, professores);
+              AtualizarProfessor(isFullP, professores);
               break;
             }
+            case 4: {
+              ListarProfessor(isFullP, professores);
+              break;
             }
-            break;
+            case 5: {
+              do{
+                RelaOption = menu_relatoriosProfessor();
+                switch (RelaOption) {
+                  case 0: {
+                    break;
+                  }
+                  case 1: {
+                    ListarProfessorPorSexo(isFullP, professores);
+                    break;
+                  }
+                  case 2: {
+                    ListarProfessorPorOrdemAlfabetico(isFullP, professores);
+                    break;
+                  }
+                  case 3: {
+                    ListarProfessorPorOrdemNascimento(isFullP, professores);
+                    break;
+                  }
+                }
+              }while(RelaOption);
+              break;
+            }
           }
-          }
-          break;
-        }
-        case 3: {
+        } while (SubOption);
+        break;
+      } // menu professor
+      case 3: {
+        do{
           SubOption = menu_disciplina();
-          switch (option) {
+        switch (SubOption) {
           case 0: {
             break;
           }
           case 1: {
-            InserirDisciplina(isFullP, isFullD, disciplinas, professores);
-            isFullD++;
+            retorno = InserirDisciplina(isFullP, isFullD, disciplinas, professores);
+            if(retorno == SUCESS){
+              isFullD++;
+            }
             break;
           }
           case 2: {
-            ExcluirDisciplina(isFullD, disciplinas);
-            isFullD--;
+            retorno = ExcluirDisciplina(isFullD, disciplinas);
+            if(retorno == SUCESS){
+              isFullD--;
+            }
             break;
           }
           case 3: {
@@ -162,11 +177,11 @@ int main(void) {
             break;
           }
           case 4: {
-            InserirAlunoNaDisciplina(isFullD, disciplinas, isFullA, aluno);
+            InserirAlunoNaDisciplina(isFullD, disciplinas, isFullA, aluno);            
             break;
           }
           case 5: {
-            ExcluirAlunoDaDisciplina(isFullD, disciplinas, isFullA, aluno);
+            ExcluirAlunoDaDisciplina(isFullD, disciplinas, isFullA, aluno);          
             break;
           }
           case 6: {
@@ -174,44 +189,47 @@ int main(void) {
             break;
           }
           case 7: {
-            option = menu_relatoriosDisciplina();
-            switch (option) {
+            do{
+              RelaOption = menu_relatoriosDisciplina();
+              switch (RelaOption) {
+                case 0: {
+                  break;
+                }
+                case 1: {
+                  ListarDisciplinaComAlunos(isFullD, disciplinas, isFullA, aluno, isFullP, professores);
+                  break;
+                }
+                case 2: {
+                  ListarDisciplinasComMaisDeQuarenta(isFullD, disciplinas, isFullP, professores);
+                  break;
+                }
+              }
+            }while(RelaOption);
+            break;
+          }
+        }
+        }while(SubOption);
+        break;
+      } // menu disciplina
+      case 4: {
+        do{
+          RelaOption = menu_relatorios();
+          switch (RelaOption) {
             case 0: {
               break;
             }
             case 1: {
-              ListarDisciplinaComAlunos(isFullD, disciplinas, isFullA, aluno, isFullP,
-                                        professores);
+              Aniversariantes(isFullA, aluno, isFullP, professores);
               break;
             }
             case 2: {
-              ListarDisciplinasComMaisDeQuarenta(isFullD, disciplinas, isFullP,
-                                                 professores);
+              Buscar(isFullA, aluno, isFullP, professores);
               break;
             }
-            }
-            break;
           }
-          }
-          break;
-        }
-        case 4: {
-          SubOption = menu_relatorios();
-          switch (option) {
-          case 0: {
-            break;
-          }
-          case 1: {
-            Aniversariantes(isFullA, aluno, isFullP, professores);
-            break;
-          }
-          case 2: {
-            Buscar(isFullA, aluno, isFullP, professores);
-            break;
-          }
-          }
-          break;
-        }
-      }
-  }while(option);
+        }while(RelaOption);
+        break;
+      } // menu relatório
+    }
+  } while (option);
 }

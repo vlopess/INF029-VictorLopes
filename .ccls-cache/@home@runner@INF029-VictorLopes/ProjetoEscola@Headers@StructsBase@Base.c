@@ -5,12 +5,6 @@
 
 #define TAM 3
 
-
-int ValidarData(int ano, int mes, int dia);
-int ValidarCPF(char cpf[]);
-int ValidarSexo(char sex);
-int ValidarExistenciaProfessor(int matricula, int limite, Professor professores[]);
-
 int GerarCodigo() {
   static int count = 0;
   count++;
@@ -19,7 +13,7 @@ int GerarCodigo() {
 
 // Funções do Aluno======================================
 
-void InserirAluno(int isFullA, Aluno aluno[]) {
+int InserirAluno(int isFullA, Aluno aluno[]) {
   int voltar;
   if (isFullA != TAM) {
     int error;
@@ -51,17 +45,24 @@ void InserirAluno(int isFullA, Aluno aluno[]) {
                           aluno[isFullA].dataBirth.dia);
     } while (error);
     puts("Aluno matriculado com sucesso!!!");
+    puts("==[1] Voltar");
+    scanf("%d", &voltar);
+    return -1;
   } else {
     puts("Lista esta cheia");
-  }
-  puts("==[1] Voltar");
-  scanf("%d", &voltar);
+    puts("==[1] Voltar");
+    scanf("%d", &voltar);
+    return 0;
+  }  
 }
 
-void ExcluirAluno(int isFullA, Aluno aluno[]) {
+int ExcluirAluno(int isFullA, Aluno aluno[]) {
   int e, j, i, voltar, code, c = 1;
   if (isFullA == 0) {
     puts("A lista nao possui alunos matriculados");
+    puts("==[1] Voltar");
+    scanf("%d", &voltar);
+    return 0;
   } else {
     system("clear");
     puts("================ALUNOS=================");
@@ -105,7 +106,9 @@ void ExcluirAluno(int isFullA, Aluno aluno[]) {
   }
   puts("==[1] Voltar");
   scanf("%d", &voltar);
+  return -1;
 }
+
 void AtualizarAluno(int isFullA, Aluno aluno[]) {
   int a, i, voltar, erro, code, c = 1;
   if (isFullA == 0) {
@@ -336,7 +339,7 @@ void ListarAlunoComMenosDeTresDisciplinas(int isFullA, Aluno aluno[]) {
 
 // Funções da Disciplina======================================
 
-void InserirDisciplina(int isFullP, int isFullD, Disciplinas disciplinas[], Professor professores[]) {
+int InserirDisciplina(int isFullP, int isFullD, Disciplinas disciplinas[], Professor professores[]) {
   int voltar, erro;
   system("clear");
   if (isFullD != TAM) {
@@ -364,20 +367,30 @@ void InserirDisciplina(int isFullP, int isFullD, Disciplinas disciplinas[], Prof
       } while (erro);
       disciplinas[isFullD].codigo = GerarCodigo();      
       puts("Disciplina cadastrada com sucesso!!");
+      puts("==[1] Voltar");
+      scanf("%d", &voltar);
+      return -1;
     } else {
       puts("Sem professores matriculados para criar disciplina");
+      puts("==[1] Voltar");
+      scanf("%d", &voltar);
+      return 0;
     }
   } else {
     puts("\nLista esta cheia");
-  }
-  puts("==[1] Voltar");
-  scanf("%d", &voltar);
+    puts("==[1] Voltar");
+    scanf("%d", &voltar);
+    return 0;
+  }  
 }
 
-void ExcluirDisciplina(int isFullD, Disciplinas disciplinas[]) {
+int ExcluirDisciplina(int isFullD, Disciplinas disciplinas[]) {
   int e, j, i, voltar, code, c;
   if (isFullD == 0) {
     puts("A lista de disciplinas esta vazia");
+    puts("==[1] Voltar");
+    scanf("%d", &voltar);
+    return 0;
   } else {
     puts("================DISCIPLINAS=================");
     printf("Digite o codigo da Disciplina que deseja excluir: ");
@@ -412,11 +425,12 @@ void ExcluirDisciplina(int isFullD, Disciplinas disciplinas[]) {
           }
         }      
         puts("Disciplina excluida com sucesso!!");
+        puts("==[1] Voltar");
+        scanf("%d", &voltar);
+        return -1;
       }
     }
-  }
-  puts("==[1] Voltar");
-  scanf("%d", &voltar);
+  }  
 }
 
 void AtualizarDisciplina(int isFullP, int isFullD, Disciplinas disciplinas[], Professor professor[]) {
@@ -512,7 +526,9 @@ void InserirAlunoNaDisciplina(int isFullD, Disciplinas disciplinas[],
                 disciplinas[d].ListAluno[disciplinas[d].QuantAluno] =
                     aluno[a].matricula;
                 disciplinas[d].QuantAluno++;
-                puts("Aluno cadastrado na disciplina com sucesso!!");
+                puts("Aluno cadastrado na disciplina com sucesso!!");                
+                puts("==[1] Voltar");
+                scanf("%d", &voltar);
                 break;
               }
             }
@@ -529,7 +545,6 @@ void InserirAlunoNaDisciplina(int isFullD, Disciplinas disciplinas[],
       puts("Numero de matricula inexistente");
     }
   }
-
   puts("==[1] Voltar");
   scanf("%d", &voltar);
 }
@@ -556,8 +571,10 @@ void ExcluirAlunoDaDisciplina(int isFullD, Disciplinas disciplinas[],
               for (j = e; j < isFullD; j++) {
                 disciplinas[d].ListAluno[j] = disciplinas[d].ListAluno[j + 1];
               }
-              puts("Aluno excluido da disciplina com sucesso!!");
               disciplinas[d].QuantAluno--;
+              puts("Aluno excluido da disciplina com sucesso!!");
+              puts("==[1] Voltar");
+              scanf("%d", &voltar);
               break;
             }
           }
@@ -660,7 +677,7 @@ void ListarDisciplinasComMaisDeQuarenta(int isFullD, Disciplinas disciplinas[], 
 
 // Funções do Professor======================================
 
-void InserirProfessor(int isFullP, Professor professores[]) {
+int InserirProfessor(int isFullP, Professor professores[]) {
   int voltar, erro;
   if (isFullP != TAM) {
     system("clear");
@@ -691,17 +708,21 @@ void InserirProfessor(int isFullP, Professor professores[]) {
              ValidarData(professores[isFullP].dataBirth.ano,
                          professores[isFullP].dataBirth.mes,
                          professores[isFullP].dataBirth.dia);
-    } while (erro);
-    professores[isFullP].matricula = GerarCodigo();    
+    } while (erro); 
     puts("Professor matriculado com sucesso!!!");
+    puts("==[1] Voltar");
+    scanf("%d", &voltar);
+    return -1;
   } else {
     puts("Lista esta cheia");
+    puts("==[1] Voltar");
+    scanf("%d", &voltar);
+    return 0;
   }
-  puts("==[1] Voltar");
-  scanf("%d", &voltar);
+  
 }
 
-void ExcluirProfessor(int isFullP, Professor professores[]) {
+int ExcluirProfessor(int isFullP, Professor professores[]) {
   int e, j, i, voltar, code, c = 1;
   if (isFullP == 0) {
     puts("A lista de professores esta vazia");
