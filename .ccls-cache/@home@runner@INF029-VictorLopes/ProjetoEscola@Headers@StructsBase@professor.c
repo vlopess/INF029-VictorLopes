@@ -5,8 +5,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define TAM 3
-
 // Funções do Professor======================================
 
 int InserirProfessor(int isFullP, Professor professores[]) {
@@ -61,6 +59,9 @@ int ExcluirProfessor(int isFullP, Professor professores[]) {
     puts("A lista de professores esta vazia");
   } else {
     puts("================PROFESSOR=================");
+    for(int k = 0; k < isFullP; k++){
+      printf("%s, %d\n", professores[k].name, professores[k].matricula);
+    }
     printf("Digite a matricula do professor que deseja excluir: ");
     scanf("%d", &code);
     for (e = 0; e < isFullP; e++) {
@@ -110,6 +111,9 @@ void AtualizarProfessor(int isFullP, Professor professores[]) {
     puts("A lista de professores esta vazia");
   } else {
     puts("================PROFESSORES=================");
+    for(int k = 0; k < isFullP; k++){
+      printf("%s, %d\n", professores[k].name, professores[k].matricula);
+    }
     printf("Digite a posicao do Professor que deseja atualizar: ");
     scanf("%d", &code);
     for (a = 0; a < isFullP; a++) {

@@ -64,6 +64,9 @@ int ExcluirAluno(int isFullA, Aluno aluno[]) {
   } else {
     system("clear");
     puts("================ALUNOS=================");
+    for(int k = 0; k < isFullA; k++){
+      printf("%s, %d\n", aluno[k].name, aluno[k].matricula);
+    }
     printf("Digite o numero de matricula do Aluno que deseja excluir: ");
     scanf("%d", &code);
     for (e = 0; e < isFullA; e++) {
@@ -114,6 +117,9 @@ void AtualizarAluno(int isFullA, Aluno aluno[]) {
   } else {
     system("clear");
     puts("================ALUNOS=================");
+    for(int k = 0; k < isFullA; k++){
+      printf("%s, %d\n", aluno[k].name, aluno[k].matricula);
+    }
     printf("Digite o numero de matricula do Aluno que deseja atualizar: ");
     scanf("%d", &code);
     for (a = 0; a < isFullA; a++) {

@@ -29,6 +29,9 @@ int InserirDisciplina(int isFullP, int isFullD, Disciplinas disciplinas[], Profe
         ln = strlen(disciplinas[isFullD].semestre) - 1;
         if (disciplinas[isFullD].semestre[ln] == '\n')
           disciplinas[isFullD].semestre[ln] = '\0';
+        for(int k = 0; k < isFullP; k++){
+          printf("%s, %d\n", professores[k].name, professores[k].matricula);
+        }
         printf("Numero de matricula do professor da disciplina: ");
         scanf("%d", &disciplinas[isFullD].matriculaProfessor);
         erro = ValidarExistenciaProfessor(
@@ -54,7 +57,7 @@ int InserirDisciplina(int isFullP, int isFullD, Disciplinas disciplinas[], Profe
 }
 
 int ExcluirDisciplina(int isFullD, Disciplinas disciplinas[]) {
-  int e, j, i, voltar, code, c;
+  int e, j, i, voltar, code, c, o = 1;
   if (isFullD == 0) {
     puts("A lista de disciplinas esta vazia");
     puts("==[1] Voltar");
@@ -62,10 +65,14 @@ int ExcluirDisciplina(int isFullD, Disciplinas disciplinas[]) {
     return 0;
   } else {
     puts("================DISCIPLINAS=================");
+    for(int k = 0; k < isFullD; k++){
+      printf("%s, %d\n", disciplinas[k].name, disciplinas[k].codigo);
+    }
     printf("Digite o codigo da Disciplina que deseja excluir: ");
     scanf("%d", &code);
     for (e = 0; e < isFullD; e++) {
       if (code == disciplinas[e].codigo) {
+        o = 1;
         for (j = e; j < isFullD - 1; j++) {
           for (i = 0; disciplinas[j].name[i] != '\0' ||
                       disciplinas[j + 1].name[i] != '\0';
@@ -99,6 +106,12 @@ int ExcluirDisciplina(int isFullD, Disciplinas disciplinas[]) {
         return -1;
       }
     }
+    if(o){
+      printf("Codigo de disciplina invalido");
+      puts("==[1] Voltar");
+      scanf("%d", &voltar);
+      return 0;
+    }
   }  
 }
 
@@ -108,6 +121,9 @@ void AtualizarDisciplina(int isFullP, int isFullD, Disciplinas disciplinas[], Pr
     puts("A lista de disciplinas esta vazia");
   } else {
     puts("================DISCIPLINAS=================");
+    for(int k = 0; k < isFullD; k++){
+      printf("%s, %d\n", disciplinas[k].name, disciplinas[k].codigo);
+    }
     printf("Digite o codigo da disciplinas que deseja atualizar: ");
     scanf("%d", &code);
     for (a = 0; a < isFullD; a++) {
@@ -172,34 +188,44 @@ void ListarDisciplina(int isFullD, Disciplinas disciplinas[], int isFullP,
 
 void InserirAlunoNaDisciplina(int isFullD, Disciplinas disciplinas[],
                               int isFullA, Aluno aluno[]) {
-  int d, a, voltar, j, code, c = 1, i = 0;
+  int d, a, y, voltar, j, code, c = 1, i = 0;
   if (isFullD == 0) {
     puts("Sem disciplinas matriculadas");
   } else {
     puts("\n================DISCIPLINAS=================");
+    for(int k = 0; k < isFullD; k++){
+      printf("%s, %d\n", disciplinas[k].name, disciplinas[k].codigo);
+    }
     printf("Digite o codigo da disciplinas que deseja: ");
     scanf("%d", &code);
     for (d = 0; d < isFullD; d++) {
       if (code == disciplinas[d].codigo) {
         c = 0;
-        if (disciplinas[d].QuantAluno != TAM) {
+        if (disciplinas[d].QuantAluno != TAM_MAX_ALUNOS_POR_DISCIPLINA) {
           if (isFullA == 0) {
             puts("Nao ha alunos matriculados");
           } else {
             puts("================ALUNOS=================");
+            for(int k = 0; k < isFullA; k++){
+                printf("%s, %d\n", aluno[k].name, aluno[k].matricula);
+            }
             printf("Digite a matricula do Aluno que deseja: ");
             scanf("%d", &code);
-            for (a = 0, i = 1; a < isFullA; a++) {
-              if (code == aluno[a].matricula) {
-                i = 0;
-                disciplinas[d].ListAluno[disciplinas[d].QuantAluno] =
-                    aluno[a].matricula;
-                disciplinas[d].QuantAluno++;
-                puts("Aluno cadastrado na disciplina com sucesso!!");                
-                puts("==[1] Voltar");
-                scanf("%d", &voltar);
-                break;
+            for(y = 0; y < disciplinas[d].QuantAluno; y++){
+              if(code == disciplinas[d].ListAluno[y]) break;
+            }
+            if(y == disciplinas[d].QuantAluno){
+              for (a = 0, i = 1; a < isFullA; a++) {
+                if (code == aluno[a].matricula) {
+                    i = 0;
+                    disciplinas[d].ListAluno[disciplinas[d].QuantAluno] = aluno[a].matricula;
+                    disciplinas[d].QuantAluno++;
+                    puts("Aluno cadastrado na disciplina com sucesso!!");
+                    break;
+                }
               }
+            }else{
+              puts("Aluno ja matriculado na disciplina");
             }
           }
         } else {
@@ -225,6 +251,9 @@ void ExcluirAlunoDaDisciplina(int isFullD, Disciplinas disciplinas[],
     puts("Sem disciplinas matriculadas");
   } else {
     puts("============EXCLUIR ALUNO DA DISCIPLINA=================");
+    for(int k = 0; k < isFullD; k++){
+      printf("%s, %d\n", disciplinas[k].name, disciplinas[k].codigo);
+    }
     printf("Digite o codigo da disciplina que deseja excluir o aluno: ");
     scanf("%d", &code);
     for (d = 0; d < isFullD; d++) {
@@ -232,7 +261,10 @@ void ExcluirAlunoDaDisciplina(int isFullD, Disciplinas disciplinas[],
         if (disciplinas[d].QuantAluno == 0) {
           puts("Sem alunos matriculados");
         } else {
-          puts("________________________________________________");
+          puts("___________EXCLUIR ALUNO DA DISCIPLINA__________");
+          for(int k = 0; k < isFullA; k++){
+            printf("%s, %d\n", aluno[k].name, aluno[k].matricula);
+          }
           printf("Digite a matricula do Aluno que deseja excluir: ");
           scanf("%d", &code);
           for (e = 0; e < isFullA; e++) {
@@ -242,8 +274,6 @@ void ExcluirAlunoDaDisciplina(int isFullD, Disciplinas disciplinas[],
               }
               disciplinas[d].QuantAluno--;
               puts("Aluno excluido da disciplina com sucesso!!");
-              puts("==[1] Voltar");
-              scanf("%d", &voltar);
               break;
             }
           }
@@ -311,14 +341,14 @@ void ListarDisciplinaComAlunos(int isFullD, Disciplinas disciplinas[],
 
 
 void ListarDisciplinasComMaisDeQuarenta(int isFullD, Disciplinas disciplinas[], int isFullP, Professor professores[]) {
-  int c, i, voltar, a = 0;
+  int c, i, voltar, a = 1;
   system("clear");
   if (isFullD == 0) {
     puts("\nSem disciplinas matriculadas");
   } else {
     for (i = 0; i < isFullD; i++) {
       if (disciplinas[i].QuantAluno > 4) {
-        a = 1;
+        a = 0;
         fflush(stdin);
         puts("==========================================");
         printf("Nome: %s\n", disciplinas[i].name);
