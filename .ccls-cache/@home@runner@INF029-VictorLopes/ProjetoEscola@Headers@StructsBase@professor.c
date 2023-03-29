@@ -95,6 +95,9 @@ int ExcluirProfessor(int isFullP, Professor professores[]) {
           professores[j].dataBirth.ano = professores[j + 1].dataBirth.ano;
         }      
         puts("Professor excluido com sucesso!!");
+        puts("==[1] Voltar");
+        scanf("%d", &voltar);
+        return -1;
       }
     }
     if (c) {
@@ -103,6 +106,7 @@ int ExcluirProfessor(int isFullP, Professor professores[]) {
   }
   puts("==[1] Voltar");
   scanf("%d", &voltar);
+  return 0;
 }
 
 void AtualizarProfessor(int isFullP, Professor professores[]) {
