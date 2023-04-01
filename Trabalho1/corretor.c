@@ -25,6 +25,8 @@
 #include <string.h>
 #include "VictorSantos20222160020.h"
 
+void testSomar();
+void testFatorial();
 void testQ1();
 void testQ2();
 void testQ3();
@@ -34,16 +36,35 @@ void testQ6();
 
 int main()
 {   
-  /*
-    testQ1();
-    testQ2();
-    testQ3();
-    testQ4();
-    testQ5();
-    testQ6();
-  */
+    //testFatorial();
+    //testSomar();
+    //testQ1();
+    // testQ2();
+    // testQ3();
+    // testQ4();
+    // testQ5();
+    // testQ6();
+  
 }
 
+void testSomar()
+{
+    printf("%d\n", somar(3, 4) == 7);
+    printf("%d\n", somar(-1, -3) == -4);
+    printf("%d\n", somar(-6, 6) == 0);
+    printf("%d\n", somar(74, 9) == 83);
+    printf("%d\n", somar(30, -9) == 21);
+    printf("%d\n", somar(-2, 8) == 6);
+    printf("%d\n", somar(1000, 99) == 1099);
+
+}
+
+void testFatorial()
+{
+    printf("%d\n", fatorial(3) == 6);
+    printf("%d\n", fatorial(1) == 1);
+    printf("%d\n", fatorial(5) == 120);
+}
 
 void testQ1()
 {
@@ -112,7 +133,7 @@ void testQ2()
     printf("%d\n", dma.qtdMeses == 1);
     printf("%d\n", dma.qtdAnos == 0);
 }
-
+  
 void testQ3()
 {
     char str[250];
