@@ -305,11 +305,29 @@ int q4(char *strTexto, char *strBusca, int posicoes[30])
 
 int q5(int num)
 {
-    
+    int n, numaux, base = 10;
+    int tam = numberHouses(num);
+    numaux = num;
+    num = 0;
+    for(int i = tam; i > 0; i--){
+      n = numaux%base;
+      numaux/=base;
+      n*=pow(10, i - 1);
+      num+=n;
+    }
     
     return num;
 }
 
+int numberHouses(int num){
+    int count = 1;
+    while (num/10 != 0)
+    {
+        count++;
+        num/=10;
+    }
+    return count;
+};
 
 /*
  Q6 = ocorrência de um número em outro
