@@ -267,9 +267,23 @@ DiasMesesAnos q2(char datainicial[], char datafinal[])
  */
 int q3(char *texto, char c, int isCaseSensitive)
 {
-    int qtdOcorrencias = -1;
-    //if((ch == s[i]) || (ch + 32 == s[i]) || (ch - 32 == s[i]))
-    return qtdOcorrencias;
+    return search(texto, c, isCaseSensitive);
+}
+
+int search(char *texto, char ch, int isCaseSensitive){
+  int qtdOcorrencias = 0;
+
+  for(int i = 0; texto[i] != '\0'; i++){
+    if(isCaseSensitive == 1){
+      if(ch == texto[i])
+        qtdOcorrencias++;
+    }else{
+      if((ch == texto[i]) || (ch + 32 == texto[i]) || (ch - 32 == texto[i]))
+        qtdOcorrencias++;
+    }
+  }
+  printf("%d\t\t", qtdOcorrencias);
+  return qtdOcorrencias;
 }
 
 /*
@@ -289,12 +303,12 @@ int q3(char *texto, char c, int isCaseSensitive)
  */
 int q4(char *strTexto, char *strBusca, int posicoes[30])
 {
-  int qtdOcorrencias = 0;
-  return Buscar(strTexto, strBusca, posicoes, qtdOcorrencias);
+  return Buscar(strTexto, strBusca, posicoes);
 }
 
-int Buscar(char *strTexto, char *strBusca, int posicoes[30], int qtdOcorrencias) {
+int Buscar(char *strTexto, char *strBusca, int posicoes[30]) {
       //Olá, o mundo é muito grande. Tem muitas pessoas, e muitos problemas    --> mui
+      int qtdOcorrencias = 0;
       int i, j, a, l, index= 0;
       for (i = 0; strTexto[i] != '\0'; i++) {
         if (strBusca[0] == strTexto[i]) {
