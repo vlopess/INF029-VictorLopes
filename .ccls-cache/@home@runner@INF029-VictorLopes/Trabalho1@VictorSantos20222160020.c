@@ -309,23 +309,26 @@ int q4(char *strTexto, char *strBusca, int posicoes[30])
 int Buscar(char *strTexto, char *strBusca, int posicoes[30]) {
       //Olá, o mundo é muito grande. Tem muitas pessoas, e muitos problemas    --> mui
       int qtdOcorrencias = 0;
-      int i, j, a, l, index= 0;
-      for (i = 0; strTexto[i] != '\0'; i++) {
-        if (strBusca[0] == strTexto[i]) {
-          for (j = i + 1, a = 1, l = 1; strBusca[a] != '\0'; j++, a++) {
-            if (strBusca[a] == strTexto[j])
+      int i, j, a, l, index;
+      i = j = a = l = index = 0;
+      for (i = 0; strTexto[i] != '\0'; i++) {      
+        if (strBusca[0] == strTexto[i]) {    
+          for (j = i + 1, a = 1, l = 1; strBusca[a] != '\0'; j++, a++) {  
+            if (strBusca[a] == strTexto[j]){
+              //printf("i: %d ", i);
               l++;
-            else
+            }else
               break;
           }
           if (strlen(strBusca) == l) {
             qtdOcorrencias++;
             posicoes[index] = i + 1;
-            printf("%d ", posicoes[index]);
+            //printf("\n%d ", posicoes[index]);
             index++;
-            posicoes[index] = i + strlen(strBusca);
-            printf("%d\n", posicoes[index]);
+            posicoes[index] = i  + l;
+            //printf("%d\n", posicoes[index]);
             index++;
+            i++;
           }
         }
       }

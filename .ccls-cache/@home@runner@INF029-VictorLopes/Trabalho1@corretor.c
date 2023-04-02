@@ -40,8 +40,8 @@ int main()
     //testSomar();
     //testQ1();
     //testQ2();
-    testQ3();
-    //testQ4();
+    //testQ3();
+    testQ4();
     //testQ5();
     // testQ6();
   
@@ -195,7 +195,7 @@ void testQ4()
     {
         posicoes[i] = -1;
     }
-    strcpy(strTexto, "Olá, o mundo é muito grande. Tem muitas pessoas, e muitos problemas");
+    strcpy(strTexto, "Ola, o mundo e muito grande. Tem muitas pessoas, e muitos problemas.");
     strcpy(strBusca, "mui");
     printf("%d\n", q4(strTexto, strBusca, posicoes) == 3);
     printf("%d\n", posicoes[0] == 16);
@@ -204,6 +204,28 @@ void testQ4()
     printf("%d\n", posicoes[3] == 36);
     printf("%d\n", posicoes[4] == 52);
     printf("%d\n", posicoes[5] == 54);
+      for (i = 0; i<30; i++){
+        posicoes[i] = -1;
+    }
+    printf("\n");
+    strcpy(strTexto,"Programar é legal?");
+    strcpy(strBusca,"sim");
+    printf("%d\n",q4(strTexto, strBusca, posicoes) == 0);
+    printf("\n");
+    for (i = 0; i<30; i++){
+        posicoes[i] = -1;
+    }
+    strcpy(strTexto,"maraaaavilha, meu prograaaama funcionou");
+    strcpy(strBusca,"aa");
+    printf("%d\n",q4(strTexto, strBusca, posicoes) == 4);
+    printf("%d\n",posicoes[0]==4);
+    printf("%d\n",posicoes[1]==5);
+    printf("%d\n",posicoes[2]==6);
+    printf("%d\n",posicoes[3]==7);
+    printf("%d\n",posicoes[4]==24);
+    printf("%d\n",posicoes[5]==25);
+    printf("%d\n",posicoes[6]==26);
+    printf("%d\n",posicoes[7]==27);
 }
 
 void testQ5()
