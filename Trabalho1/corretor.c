@@ -42,7 +42,7 @@ int main()
     // testQ2();
     // testQ3();
     // testQ4();
-    // testQ5();
+     testQ5();
     // testQ6();
   
 }
@@ -79,6 +79,34 @@ void testQ1()
     printf("%d\n", q1(str) == 0);
     strcpy(str, "/9/2014");
     printf("%d\n", q1(str) == 0);
+    strcpy(str, "30/02/2015");
+    printf("%d\n", q1(str) == 0);
+    strcpy(str, "29/02/2012");
+    printf("%d\n", q1(str) == 1);
+    strcpy(str, "19/1/2014");
+    printf("%d\n", q1(str) == 1);
+    strcpy(str, "er/er/erer");
+    printf("%d\n", q1(str) == 0);
+    strcpy(str, "33/9/2014");
+    printf("%d\n", q1(str) == 0);
+    strcpy(str, "31/02/2015");
+    printf("%d\n", q1(str) == 0);
+    strcpy(str, "29/a2/2012");
+    printf("%d\n", q1(str) == 0);
+    strcpy(str, "a/1a3/sdad");
+    printf("%d\n", q1(str) == 0);
+    strcpy(str, "45/14/0");
+    printf("%d\n", q1(str) == 0);
+    strcpy(str, "31/1/2014");
+    printf("%d\n", q1(str) == 1);
+    strcpy(str, "02/03/2015");
+    printf("%d\n", q1(str) == 1);
+    strcpy(str, "12/1/15");
+    printf("%d\n", q1(str) == 1);
+    strcpy(str, "1/9/16");
+    printf("%d\n", q1(str) == 1);
+    strcpy(str, "1/1/11");
+    printf("%d\n", q1(str) == 1);
 }
 
 void testQ2()
@@ -184,6 +212,10 @@ void testQ5()
     printf("%d\n", q5(78) == 87);
     printf("%d\n", q5(3) == 3);
     printf("%d\n", q5(5430) == 345);
+    printf("%d\n", q5(123) == 321);
+    printf("%d\n", q5(10) == 1);
+    printf("%d\n", q5(311111) == 111113);
+    printf("%d\n", q5(50000) == 5);
 }
 
 void testQ6()

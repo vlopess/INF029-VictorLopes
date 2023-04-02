@@ -51,5 +51,8 @@ int q4(char *strTexto, char *strBusca, int posicoes[30]);
 int q5(int num);
 int q6(int numerobase, int numerobusca);
 DataQuebrada quebraData(char data[]);
+int validarData(int dia, int mes, int ano);
+int QuantDias(int mes);
+int numberHouses(int num);
 
 #endif  // TRABALHO1_VictorSantos20222160020_H

@@ -24,6 +24,7 @@
 #include <stdio.h>
 #include "VictorSantos20222160020.h"
 #include <stdlib.h>
+#include <math.h>
 /*
 ## função utilizada para testes  ##
 somar = somar dois valores<br>@objetivo<br>Somar dois valores x e y e retonar o resultado da soma<br>@entrada<br>dois inteiros x e y<br>@saida<br>resultado da soma (x + y)
@@ -75,10 +76,17 @@ DataQuebrada quebraData(char data[]){
 	char sMes[3];
 	char sAno[5];
 	int i; 
-
+  
 	for (i = 0; data[i] != '/'; i++){
-		sDia[i] = data[i];	
+		if(data[i] >= 48 && data[i] <= 57){
+      sDia[i] = data[i];
+      
+    }else{
+      dq.valido = 0;
+      return dq;
+    }
 	}
+  
 	if(i == 1 || i == 2){ // testa se tem 1 ou dois digitos
 		sDia[i] = '\0';  // coloca o barra zero no final
 	}else {
@@ -89,12 +97,16 @@ DataQuebrada quebraData(char data[]){
 
 	int j = i + 1; //anda 1 cada para pular a barra
 	i = 0;
-
+  //9/1/2014
 	for (; data[j] != '/'; j++){
-		sMes[i] = data[j];
-		i++;
+    if(data[j] >= 48 && data[j] <= 57){
+  		sMes[i] = data[j];
+  		i++;
+    }else{
+      dq.valido = 0;
+      return dq;
+    }
 	}
-
 	if(i == 1 || i == 2){ // testa se tem 1 ou dois digitos
 		sMes[i] = '\0';  // coloca o barra zero no final
 	}else {
@@ -105,14 +117,23 @@ DataQuebrada quebraData(char data[]){
 
 	j = j + 1; //anda 1 cada para pular a barra
 	i = 0;
-	
+	//9/1/2014
 	for(; data[j] != '\0'; j++){
-	 	sAno[i] = data[j];
-	 	i++;
+    if(data[j] >= 48 && data[j] <= 57){
+      sAno[i] = data[j];
+      i++;
+    }else{
+      dq.valido = 0;
+      return dq;
+    }
 	}
 
 	if(i == 2 || i == 4){ // testa se tem 2 ou 4 digitos
-		sAno[i] = '\0';  // coloca o barra zero no final
+		sAno[i] = '\0';// coloca o barra zero no final
+    if(i == 2)
+      dq.iAno = atoi(sAno) + 2000;
+    if(i == 4)
+      dq.iAno = atoi(sAno); 
 	}else {
 		dq.valido = 0;
     return dq;
@@ -120,7 +141,7 @@ DataQuebrada quebraData(char data[]){
 
   dq.iDia = atoi(sDia);
   dq.iMes = atoi(sMes);
-  dq.iAno = atoi(sAno); 
+  
 
 	dq.valido = 1;
     
@@ -141,22 +162,57 @@ DataQuebrada quebraData(char data[]){
  */
 int q1(char data[])
 {
-  int datavalida = 1;
-
   //quebrar a string data em strings sDia, sMes, sAno
-
-  //DataQuebrada dataQuebrada = quebraData(data);
-  //if (dataQuebrada.valido == 0) return 0;
-
-  //printf("%s\n", data);
-
-  if (datavalida)
-      return 1;
-  else
-      return 0;
+  DataQuebrada dataQuebrada = quebraData(data);
+  if (dataQuebrada.valido == 0) return 0;
+  //printf("%d %d %d",dataQuebrada.iDia, dataQuebrada.iMes, dataQuebrada.iAno);
+  return validarData(dataQuebrada.iDia, dataQuebrada.iMes, dataQuebrada.iAno);
+  // if (datavalida)
+  //     return 1;
+  // else
+  //     return 0;
 }
 
+int validarData(int dia, int mes, int ano){
+  int maxDias;
+  if(dia < 0 || ano < 0 || mes < 0 || mes > 13)
+    return 0;
+  if(mes == 2){
+    if(((ano % 4 == 0) && (ano % 100!= 0)) || (ano%400 == 0)){
+      maxDias = 29;
+    }else{
+      maxDias = 28;
+    }
+    //printf("(%d)", maxDias);
+  }else{
+    maxDias = QuantDias(mes);
+    //printf("(%d)", maxDias);
+  }
+  if(dia > maxDias)
+    return 0;
+  
+    
+  return 1;
+  
+}
 
+int QuantDias(int mes){
+    switch(mes){          
+      case 1:
+      case 3:
+      case 5:
+      case 7:
+      case 8:
+      case 10:
+      case 12:
+          return 31;
+      case 4:
+      case 6:
+      case 9:
+      case 11:
+          return 30;
+    }
+}
 
 /*
  Q2 = diferença entre duas datas
@@ -211,7 +267,7 @@ DiasMesesAnos q2(char datainicial[], char datafinal[])
 int q3(char *texto, char c, int isCaseSensitive)
 {
     int qtdOcorrencias = -1;
-
+    //if((ch == s[i]) || (ch + 32 == s[i]) || (ch - 32 == s[i]))
     return qtdOcorrencias;
 }
 
@@ -249,9 +305,11 @@ int q4(char *strTexto, char *strBusca, int posicoes[30])
 
 int q5(int num)
 {
-
+    
+    
     return num;
 }
+
 
 /*
  Q6 = ocorrência de um número em outro
