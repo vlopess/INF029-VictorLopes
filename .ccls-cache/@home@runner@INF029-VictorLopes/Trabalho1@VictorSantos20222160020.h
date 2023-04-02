@@ -56,5 +56,6 @@ int QuantDias(int mes);
 int numberHouses(int num);
 int Buscar(char *strTexto, char *strBusca, int posicoes[30]);
 int search(char *texto, char ch, int isCaseSensitive);
+int searchNumber(int numerobase, int numerobusca);
 
 #endif  // TRABALHO1_VictorSantos20222160020_H
