@@ -25,6 +25,7 @@
 #include "VictorSantos20222160020.h"
 #include <stdlib.h>
 #include <math.h>
+#include <string.h>
 /*
 ## função utilizada para testes  ##
 somar = somar dois valores<br>@objetivo<br>Somar dois valores x e y e retonar o resultado da soma<br>@entrada<br>dois inteiros x e y<br>@saida<br>resultado da soma (x + y)
@@ -288,10 +289,35 @@ int q3(char *texto, char c, int isCaseSensitive)
  */
 int q4(char *strTexto, char *strBusca, int posicoes[30])
 {
-    int qtdOcorrencias = -1;
-
-    return qtdOcorrencias;
+  int qtdOcorrencias = 0;
+  return Buscar(strTexto, strBusca, posicoes, qtdOcorrencias);
 }
+
+int Buscar(char *strTexto, char *strBusca, int posicoes[30], int qtdOcorrencias) {
+      //Olá, o mundo é muito grande. Tem muitas pessoas, e muitos problemas    --> mui
+      int i, j, a, l, index= 0;
+      for (i = 0; strTexto[i] != '\0'; i++) {
+        if (strBusca[0] == strTexto[i]) {
+          for (j = i + 1, a = 1, l = 1; strBusca[a] != '\0'; j++, a++) {
+            if (strBusca[a] == strTexto[j])
+              l++;
+            else
+              break;
+          }
+          if (strlen(strBusca) == l) {
+            qtdOcorrencias++;
+            posicoes[index] = i + 1;
+            printf("%d ", posicoes[index]);
+            index++;
+            posicoes[index] = i + strlen(strBusca);
+            printf("%d\n", posicoes[index]);
+            index++;
+          }
+        }
+      }
+    //printf("%d\n", qtdOcorrencias);
+    return qtdOcorrencias;
+  }
 
 /*
  Q5 = inverte número

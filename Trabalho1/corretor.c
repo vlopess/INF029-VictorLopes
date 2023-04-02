@@ -41,8 +41,8 @@ int main()
     //testQ1();
     // testQ2();
     // testQ3();
-    // testQ4();
-     testQ5();
+    testQ4();
+    //testQ5();
     // testQ6();
   
 }
@@ -190,7 +190,7 @@ void testQ4()
     printf("%d\n", posicoes[1] == 8);
     printf("%d\n", posicoes[2] == 34);
     printf("%d\n", posicoes[3] == 37);
-
+    printf("\n");
     for (i = 0; i < 30; i++)
     {
         posicoes[i] = -1;
