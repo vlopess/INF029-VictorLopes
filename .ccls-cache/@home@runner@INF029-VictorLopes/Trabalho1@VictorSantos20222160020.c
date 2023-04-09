@@ -27,6 +27,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <locale.h>
 /*
 ## função utilizada para testes  ##
 somar = somar dois valores<br>@objetivo<br>Somar dois valores x e y e retonar o
@@ -125,12 +126,13 @@ DataQuebrada quebraData(char data[]) {
     }
   }
 
-  if (i == 2 || i == 4) { // testa se tem 2 ou 4 digitos
+  if (i == 2 || i == 4 || i == 1) { // testa se tem 2 ou 4 digitos
     sAno[i] = '\0';       // coloca o barra zero no final
-    if (i == 2)
+    if (i == 2 || i == 1)
       dq.iAno = atoi(sAno) + 2000;
     if (i == 4)
       dq.iAno = atoi(sAno);
+    
   } else {
     dq.valido = 0;
     return dq;
@@ -159,54 +161,49 @@ podem ter apenas dois digitos.
     pode utilizar strlen para pegar o tamanho da string
  */
 int q1(char data[]) {
-  // quebrar a string data em strings sDia, sMes, sAno
+  
   DataQuebrada dataQuebrada = quebraData(data);
   if (dataQuebrada.valido == 0)
     return 0;
-  // printf("%d %d %d",dataQuebrada.iDia, dataQuebrada.iMes, dataQuebrada.iAno);
   return validarData(dataQuebrada.iDia, dataQuebrada.iMes, dataQuebrada.iAno);
-  // if (datavalida)
-  //     return 1;
-  // else
-  //     return 0;
+  
 }
 
 int validarData(int dia, int mes, int ano) {
   int maxDias;
-  if (dia < 0 || ano < 0 || mes < 0 || mes > 13)
+  if (dia < 0 || ano < 0 || mes < 0 || mes > 12)
     return 0;
-  if (mes == 2) {
-    if (((ano % 4 == 0) && (ano % 100 != 0)) || (ano % 400 == 0)) {
-      maxDias = 29;
-    } else {
-      maxDias = 28;
-    }
-    // printf("(%d)", maxDias);
-  } else {
-    maxDias = QuantDias(mes);
-    // printf("(%d)", maxDias);
-  }
+  
+  maxDias = QuantDias(mes, ano);
+  
   if (dia > maxDias)
     return 0;
 
   return 1;
 }
 
-int QuantDias(int mes) {
+int QuantDias(int mes, int ano) {
   switch (mes) {
-  case 1:
-  case 3:
-  case 5:
-  case 7:
-  case 8:
-  case 10:
-  case 12:
-    return 31;
-  case 4:
-  case 6:
-  case 9:
-  case 11:
-    return 30;
+    case 1:
+    case 3:
+    case 5:
+    case 7:
+    case 8:
+    case 10:
+    case 12:
+      return 31;
+    case 4:
+    case 6:
+    case 9:
+    case 11:
+      return 30;
+    case 2:{
+      if (((ano % 4 == 0) && (ano % 100 != 0)) || (ano % 400 == 0)) {
+        return 29;
+      } else {
+        return 28;
+      }
+    }
   }
 }
 
@@ -218,14 +215,16 @@ int QuantDias(int mes) {
     uma string datainicial, uma string datafinal.
  @saida
     Retorna um tipo DiasMesesAnos. No atributo retorno, deve ter os possíveis
- valores abaixo 1 -> cálculo de diferença realizado com sucesso 2 -> datainicial
- inválida 3 -> datafinal inválida 4 -> datainicial > datafinal Caso o cálculo
- esteja correto, os atributos qtdDias, qtdMeses e qtdAnos devem ser preenchidos
+ valores abaixo 
+ 1 -> cálculo de diferença realizado com sucesso 
+ 2 -> datainicial inválida 
+ 3 -> datafinal inválida  
+ 4 -> datainicial > datafinal 
+ Caso o cálculo esteja correto, os atributos qtdDias, qtdMeses e qtdAnos devem ser preenchidos
  com os valores correspondentes.
  */
 DiasMesesAnos q2(char datainicial[], char datafinal[]) {
-
-  // calcule os dados e armazene nas três variáveis a seguir
+  
   DiasMesesAnos dma;
 
   if (q1(datainicial) == 0) {
@@ -234,15 +233,42 @@ DiasMesesAnos q2(char datainicial[], char datafinal[]) {
   } else if (q1(datafinal) == 0) {
     dma.retorno = 3;
     return dma;
-  } else {
-    // verifique se a data final não é menor que a data inicial
+  } 
 
-    // calcule a distancia entre as datas
-
-    // se tudo der certo
+  DataQuebrada dma1 = quebraData(datainicial);
+  DataQuebrada dma2 = quebraData(datafinal);
+  
+  if((dma1.iAno > dma2.iAno) || (dma1.iAno == dma2.iAno && dma1.iMes > dma2.iMes) ||(dma1.iAno == dma2.iAno && dma1.iMes == dma2.iMes && dma1.iDia > dma2.iDia)){
+    dma.retorno = 4;
+    return dma;
+  }else {
+    int mes = QuantDias(dma1.iMes, dma1.iAno);
+    int ano = QuantDias(dma2.iMes, dma2.iAno) == 29 ? 366 : 365;
+    //printf("%d\n", ano);
     dma.retorno = 1;
+    int data1 =  QuantDiasAll(dma1.iMes, dma1.iAno) + dma1.iDia;
+    data1 += dma1.iAno * ano;
+    int data2 =  QuantDiasAll(dma2.iMes, dma2.iAno) + dma2.iDia;
+    data2 += dma2.iAno * ano;
+    int data = data2 - data1;
+    dma.qtdAnos  = data/ano;
+    data -=  dma.qtdAnos * ano;
+    dma.qtdMeses = data/mes;
+    dma.qtdDias = data%mes;
     return dma;
   }
+}
+
+
+int QuantDiasAll(int month, int ano){
+  int mes = 1;
+  int days = 0;
+  while(mes < month){
+    days+=QuantDias(mes, ano);
+    mes++;
+  }
+  //printf("(%d)\n", days);
+  return days;
 }
 
 /*
@@ -304,33 +330,35 @@ int q4(char *strTexto, char *strBusca, int posicoes[30]) {
 }
 
 int Buscar(char *strTexto, char *strBusca, int posicoes[30]) {
-  // Olá, o mundo é muito grande. Tem muitas pessoas, e muitos problemas    -->
-  // mui
   int qtdOcorrencias = 0;
-  int i, j, a, l, index;
-  i = j = a = l = index = 0;
+  int i, j, a, l, index, acento, c;
+  index = 0;
+  acento = 0;
   for (i = 0; strTexto[i] != '\0'; i++) {
-    if (strBusca[0] == strTexto[i]) {
+   if(strTexto[i] > 0){      
+      if (strBusca[0] == strTexto[i]) {
       for (j = i + 1, a = 1, l = 1; strBusca[a] != '\0'; j++, a++) {
         if (strBusca[a] == strTexto[j]) {
-          // printf("i: %d ", i);
           l++;
         } else
           break;
       }
       if (strlen(strBusca) == l) {
+        c = acento/2;
         qtdOcorrencias++;
-        posicoes[index] = i + 1;
-        // printf("\n%d ", posicoes[index]);
+        posicoes[index] = i + 1 - c;
+        //printf("\n%d ", posicoes[index]);
         index++;
-        posicoes[index] = i + l;
-        // printf("%d\n", posicoes[index]);
+        posicoes[index] = i + l - c;
+        //printf("%d\n", posicoes[index]);
         index++;
         i++;
       }
     }
+   }else
+      acento++;
   }
-  // printf("%d\n", qtdOcorrencias);
+  //printf("acentos: %d\n",acento);
   return qtdOcorrencias;
 }
 
