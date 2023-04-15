@@ -243,16 +243,17 @@ DiasMesesAnos q2(char datainicial[], char datafinal[]) {
     return dma;
   }else {
     int mes = QuantDias(dma1.iMes, dma1.iAno);
-    int ano = QuantDias(dma2.iMes, dma2.iAno) == 29 ? 366 : 365;
-    //printf("%d\n", ano);
     dma.retorno = 1;
     int data1 =  QuantDiasAll(dma1.iMes, dma1.iAno) + dma1.iDia;
-    data1 += dma1.iAno * ano;
+    data1 += dma1.iAno * 365;
+    //data1 += QuantDias(dma1.iMes, dma1.iAno) == 29 ? 1:0;
     int data2 =  QuantDiasAll(dma2.iMes, dma2.iAno) + dma2.iDia;
-    data2 += dma2.iAno * ano;
+    data2 += dma2.iAno * 365;    
+    //data2 += QuantDias(dma2.iMes, dma2.iAno) == 29 ? 1:0;
     int data = data2 - data1;
-    dma.qtdAnos  = data/ano;
-    data -=  dma.qtdAnos * ano;
+    data +=  QuantDiasAll(dma1.iMes, dma1.iAno) == QuantDiasAll(dma2.iMes, dma2.iAno) ? 1:0;
+    dma.qtdAnos  = data/365;
+    data -=  dma.qtdAnos * 365;
     dma.qtdMeses = data/mes;
     dma.qtdDias = data%mes;
     return dma;
@@ -267,7 +268,6 @@ int QuantDiasAll(int month, int ano){
     days+=QuantDias(mes, ano);
     mes++;
   }
-  //printf("(%d)\n", days);
   return days;
 }
 
@@ -299,7 +299,6 @@ int search(char *texto, char ch, int isCaseSensitive) {
         qtdOcorrencias++;
     }
   }
-  // printf("%d\t\t", qtdOcorrencias);
   return qtdOcorrencias;
 }
 
@@ -334,8 +333,22 @@ int Buscar(char *strTexto, char *strBusca, int posicoes[30]) {
   int i, j, a, l, index, acento, c;
   index = 0;
   acento = 0;
+  //  12 12 12 á?bc
+  for(int c = 0; strTexto[c] != '\0'; c++){
+    if(strTexto[c] == -61){
+      for(int i = c;strTexto[i] != '\0';i++){
+        strTexto[i] = strTexto[i + 1];
+      }
+    }
+  }
+  for(int c = 0; strBusca[c] != '\0'; c++){
+    if(strBusca[c] == -61){
+      for(int i = c;strBusca[i] != '\0';i++){
+        strBusca[i] = strBusca[i + 1];
+      }
+    }
+  }
   for (i = 0; strTexto[i] != '\0'; i++) {
-   if(strTexto[i] > 0){      
       if (strBusca[0] == strTexto[i]) {
       for (j = i + 1, a = 1, l = 1; strBusca[a] != '\0'; j++, a++) {
         if (strBusca[a] == strTexto[j]) {
@@ -346,19 +359,14 @@ int Buscar(char *strTexto, char *strBusca, int posicoes[30]) {
       if (strlen(strBusca) == l) {
         c = acento/2;
         qtdOcorrencias++;
-        posicoes[index] = i + 1 - c;
-        //printf("\n%d ", posicoes[index]);
+        posicoes[index] = i + 1;
         index++;
-        posicoes[index] = i + l - c;
-        //printf("%d\n", posicoes[index]);
+        posicoes[index] = i + l;
         index++;
         i++;
       }
     }
-   }else
-      acento++;
   }
-  //printf("acentos: %d\n",acento);
   return qtdOcorrencias;
 }
 
@@ -428,7 +436,6 @@ int searchNumber(int numerobase, int numerobusca) {
 
   for (; base; base /= 10) {
     int aux = num / base;
-    //printf("\n%d == %d\n", aux, numerobusca);
     if (aux == numerobusca){
       qtdOcorrencias++;
       t /= a;
@@ -437,6 +444,5 @@ int searchNumber(int numerobase, int numerobusca) {
     num %= t;
     t /= 10;
   }
-  // printf("%d", qtdOcorrencias);
   return qtdOcorrencias;
 }

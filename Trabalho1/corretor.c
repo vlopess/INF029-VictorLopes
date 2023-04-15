@@ -37,11 +37,10 @@ void testQ6();
 
 int main()
 {   
-    setlocale(LC_ALL,"");
     //testFatorial();
     //testSomar();
     //testQ1();
-    testQ2();
+    //testQ2();
     //testQ3();
     //testQ4();
     //testQ5();
@@ -412,10 +411,6 @@ void testQ4()
     char strBusca[50];
     int posicoes[30];
     int i;
-    for (i = 0; i < 30; i++)
-    {
-        posicoes[i] = -1;
-    }
     strcpy(strTexto, "Laboratorio de programacao: para ratos de programação");
     strcpy(strBusca, "rato");
     printf("%d\n", q4(strTexto, strBusca, posicoes) == 2);
@@ -424,10 +419,6 @@ void testQ4()
     printf("%d\n", posicoes[2] == 34);
     printf("%d\n", posicoes[3] == 37);
     printf("\n");
-    for (i = 0; i < 30; i++)
-    {
-        posicoes[i] = -1;
-    }
     strcpy(strTexto, "Olá, o mundo é muito grande. Tem muitas pessoas, e muitos problemas.");
     strcpy(strBusca, "mui");
     printf("%d\n", q4(strTexto, strBusca, posicoes) == 3);
@@ -437,9 +428,6 @@ void testQ4()
     printf("%d\n", posicoes[3] == 36);
     printf("%d\n", posicoes[4] == 52);
     printf("%d\n", posicoes[5] == 54);
-      for (i = 0; i<30; i++){
-        posicoes[i] = -1;
-    }
     printf("\n");
     strcpy(strTexto,"Programar é legal?");
     strcpy(strBusca,"sim");
@@ -458,8 +446,8 @@ void testQ4()
     printf("%d\n",posicoes[6]==26);
     printf("%d\n",posicoes[7]==27);
 
-    strcpy(strTexto,"Há cavalos e são deverás grandes na cavalolândia");
-    strcpy(strBusca,"cavalo");
+    strcpy(strTexto,"Há cávalos e são deverás grandes na cávalolândia");
+    strcpy(strBusca,"cávalo");
     printf("%d\n",q4(strTexto, strBusca, posicoes) == 2);
     printf("%d\n",posicoes[0]==4);
     printf("%d\n",posicoes[1]==9);
@@ -467,17 +455,19 @@ void testQ4()
     printf("%d\n",posicoes[3]==42);
     puts("FIM");
   
-    strcpy(strTexto,"ááraaaavilhá, méu prograaaama funcionou");
-    strcpy(strBusca,"aa");
-    printf("%d\n",q4(strTexto, strBusca, posicoes) == 4);
-    printf("%d\n",posicoes[0]==4);
-    printf("%d\n",posicoes[1]==5);
-    printf("%d\n",posicoes[2]==6);
-    printf("%d\n",posicoes[3]==7);
-    printf("%d\n",posicoes[4]==24);
-    printf("%d\n",posicoes[5]==25);
-    printf("%d\n",posicoes[6]==26);
-    printf("%d\n",posicoes[7]==27);
+    strcpy(strTexto,"ááráááávilhá, méu prográáááma funcionou");
+    strcpy(strBusca,"áá");
+    printf("%d\n",q4(strTexto, strBusca, posicoes) == 5);
+    printf("%d\n",posicoes[0]==1);
+    printf("%d\n",posicoes[1]==2);
+    printf("%d\n",posicoes[2]==4);
+    printf("%d\n",posicoes[3]==5);
+    printf("%d\n",posicoes[4]==6);
+    printf("%d\n",posicoes[5]==7);
+    printf("%d\n",posicoes[6]==24);
+    printf("%d\n",posicoes[7]==25);
+    printf("%d\n",posicoes[8]==26);
+    printf("%d\n",posicoes[9]==27);
 }
 
 void testQ5()
@@ -519,6 +509,15 @@ void testQ6()
     printf("%d\n", q6(542344423, 23) == 2);
     printf("%d\n", q6(22444422, 22) == 2);
     printf("%d\n", q6(545454545, 45) == 4);
+  printf("%d\n", q6(54424, 42) == 1);
+    printf("%d\n", q6(34567368, 11) == 0);
+    printf("%d\n", q6(22222222, 22) == 4);
+    printf("%d\n", q6(4444444, 4) == 7);
+    printf("%d\n", q6(4444444, 444) == 2);
+    printf("%d\n", q6(541441, 41) == 2);
+    printf("%d\n", q6(542344423, 23) == 2);
+    printf("%d\n", q6(22444422, 22) == 2);
+    printf("%d\n", q6(545454545, 54) == 4);
     puts("FIM");
 }
 
