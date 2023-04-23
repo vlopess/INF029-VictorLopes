@@ -54,6 +54,7 @@ DataQuebrada quebraData(char data[]);
 int validarData(int dia, int mes, int ano);
 int QuantDias(int mes, int ano);
 int QuantDiasAll(int month, int ano);
+int bissexto(int ano);
 int numberHouses(int num);
 int Buscar(char *strTexto, char *strBusca, int posicoes[30]);
 int search(char *texto, char ch, int isCaseSensitive);

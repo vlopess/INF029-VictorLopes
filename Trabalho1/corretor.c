@@ -40,7 +40,7 @@ int main()
     //testFatorial();
     //testSomar();
     //testQ1();
-    //testQ2();
+    testQ2();
     //testQ3();
     //testQ4();
     //testQ5();
@@ -136,7 +136,27 @@ void testQ1()
     printf("%d\n", q1(str) == 0);
     strcpy(str, "23/23/23");
     printf("%d\n", q1(str) == 0);
-    puts("FIM");
+    strcpy(str,"29/02/2015");
+    printf("%d\n",q1(str) == 0);
+    strcpy(str,"29/02/2012");
+    printf("%d\n",q1(str) == 1);
+    strcpy(str,"9/13/2014");
+    printf("%d\n",q1(str) == 0);
+    strcpy(str,"45/4/2014");
+    printf("%d\n",q1(str) == 0);
+    strcpy(str,"12/1/15");
+    printf("%d\n",q1(str) == 1);
+    strcpy(str,"1/9/2016");
+    printf("%d\n",q1(str) == 1);
+    strcpy(str,"//2016");
+    printf("%d\n",q1(str) == 0);
+    strcpy(str,"1//20");
+    printf("%d\n",q1(str) == 0);
+    strcpy(str,"1/R/2016");
+    printf("%d\n",q1(str) == 0);
+    strcpy(str,"1/12/19");
+    printf("%d\n",q1(str) == 1); 
+    puts("FIM1");
 }
 
 void testQ2()
@@ -252,7 +272,7 @@ void testQ2()
     printf("%d\n", dma.qtdDias == 0);
     printf("%d\n", dma.qtdMeses == 0);
     printf("%d\n", dma.qtdAnos == 3);
-    printf("f\n\n");
+    printf("\n\n");
     strcpy(datainicial, "01/30/2015");
     strcpy(datafinal, "01/06/2016");
     dma = q2(datainicial, datafinal);
@@ -379,6 +399,124 @@ void testQ2()
     printf("%d\n", dma.qtdDias == 1);
     printf("%d\n", dma.qtdMeses == 1);
     printf("%d\n", dma.qtdAnos == 0);
+    strcpy(datainicial, "01/06/2015");
+    strcpy(datafinal, "01/06/2016");
+    dma = q2(datainicial, datafinal);
+    printf("%d\n", dma.retorno == 1);
+    printf("%d\n", dma.qtdDias == 0);
+    printf("%d\n", dma.qtdMeses == 0);
+    printf("%d\n", dma.qtdAnos == 1);
+    printf("FIMp");
+    
+    strcpy(datainicial,"01/30/2015");
+    strcpy(datafinal,"01/06/2016");
+    dma = q2(datainicial, datafinal);
+    printf("%d\n",dma.retorno == 2);
+
+    strcpy(datainicial,"01/3/2015");
+    strcpy(datafinal,"40/06/2016");
+    dma = q2(datainicial, datafinal);
+    printf("%d\n",dma.retorno == 3);
+
+    strcpy(datainicial,"01/06/2016");
+    strcpy(datafinal,"01/06/2015");
+    dma = q2(datainicial, datafinal);
+    printf("%d\n",dma.retorno == 4);
+
+    strcpy(datainicial,"06/06/2017");
+    strcpy(datafinal,"07/07/2017");
+    dma = q2(datainicial, datafinal);
+    printf("%d\n",dma.retorno == 1);
+    printf("%d\n",dma.qtdDias == 1);
+    printf("%d\n",dma.qtdMeses == 1);
+    printf("%d\n",dma.qtdAnos == 0);
+
+    strcpy(datainicial,"06/06/2017");
+    strcpy(datafinal,"05/07/2018");
+    dma = q2(datainicial, datafinal);
+    printf("%d\n",dma.retorno == 1);
+    printf("%d\n",dma.qtdDias == 29);
+    printf("%d\n",dma.qtdMeses == 0);
+    printf("%d\n",dma.qtdAnos == 1);
+
+    strcpy(datainicial,"26/07/2017");
+    strcpy(datafinal,"25/08/2017");
+    dma = q2(datainicial, datafinal);
+    printf("%d\n",dma.retorno == 1);
+    printf("%d\n",dma.qtdDias == 30);
+    printf("%d\n",dma.qtdMeses == 0);
+    printf("%d\n",dma.qtdAnos == 0);
+
+    strcpy(datainicial,"26/06/2017");
+    strcpy(datafinal,"26/07/2017");
+    dma = q2(datainicial, datafinal);
+    printf("%d\n",dma.retorno == 1);
+    printf("%d\n",dma.qtdDias == 0);
+    printf("%d\n",dma.qtdMeses == 1);
+    printf("%d\n",dma.qtdAnos == 0);
+
+    strcpy(datainicial,"27/02/2016");
+    strcpy(datafinal,"03/03/2017");
+    dma = q2(datainicial, datafinal);
+    printf("%d\n",dma.retorno == 1);
+    printf("%d\n",dma.qtdDias == 4);
+    printf("%d\n",dma.qtdMeses == 0);
+    printf("%d\n",dma.qtdAnos == 1);
+
+    strcpy(datainicial,"06/06/2022");
+    strcpy(datafinal,"06/06/2023");
+    dma = q2(datainicial, datafinal);
+    printf("%d\n",dma.retorno == 1);
+    printf("%d\n",dma.qtdDias == 0);
+    printf("%d\n",dma.qtdMeses == 0);
+    printf("%d\n",dma.qtdAnos == 1);
+
+    printf("CHATGPT:\n\n");
+    strcpy(datainicial, "01/01/2022");
+    strcpy(datafinal, "31/01/2022");
+    dma = q2(datainicial, datafinal);
+    printf("%d\n", dma.retorno == 1);
+    printf("%d\n", dma.qtdDias == 30);
+    printf("%d\n", dma.qtdMeses == 0);
+    printf("%d\n", dma.qtdAnos == 0);
+    printf("\n\n");
+    strcpy(datainicial, "01/03/2023");
+    strcpy(datafinal, "31/03/2023");
+    dma = q2(datainicial, datafinal);
+    printf("%d\n", dma.retorno == 1);
+    printf("%d\n", dma.qtdDias == 30);
+    printf("%d\n", dma.qtdMeses == 0);
+    printf("%d\n", dma.qtdAnos == 0);
+
+    printf("\n\n");
+    strcpy(datainicial, "10/06/2022");
+    strcpy(datafinal, "18/06/2022");
+    dma = q2(datainicial, datafinal);
+    printf("%d\n", dma.retorno == 1);
+    printf("%d\n", dma.qtdDias == 8);
+    printf("%d\n", dma.qtdMeses == 0);
+    printf("%d\n", dma.qtdAnos == 0);
+
+    printf("\n\n");
+    strcpy(datainicial, "01/01/2021");
+    strcpy(datafinal, "01/01/2023");
+    dma = q2(datainicial, datafinal);
+    printf("%d\n", dma.retorno == 1);
+    printf("%d\n", dma.qtdDias == 0);
+    printf("%d\n", dma.qtdMeses == 0);
+    printf("%d\n", dma.qtdAnos == 2);
+
+    printf("\n\n");
+    strcpy(datainicial, "20/07/2023");
+    strcpy(datafinal, "19/07/2024");
+    dma = q2(datainicial, datafinal);
+    printf("%d\n", dma.retorno == 1);
+    printf("%d\n", dma.qtdDias == 364);
+    printf("%d\n", dma.qtdMeses == 11);
+    printf("%d\n", dma.qtdAnos == 0);
+    
+
+    printf("FIM2");
 
       
 }
@@ -392,6 +530,22 @@ void testQ3()
     printf("%d\n", q3(str, 'l', 1) == 0);
     printf("%d\n", q3(str, 'l', 0) == 1);
     printf("%d\n", q3(str, 'L', 0) == 1);
+
+    strcpy(str,"Letícia, signifiCa fEliCIdADE");
+    printf("%d\n",q3(str, 'c', 0) == 3);
+    printf("%d\n",q3(str, 'C', 0) == 3);
+    printf("%d\n",q3(str, 'c', 1) == 1);
+    printf("%d\n",q3(str, 'C', 1) == 2);
+    printf("%d\n",q3(str, 'R', 0) == 0);
+    printf("%d\n",q3(str, 'e', 0) == 3);
+    printf("%d\n",q3(str, 'E', 1) == 2);
+    printf("%d\n",q3(str, 'S', 1) == 0);
+    strcpy(str,"Renato Lima Novais");
+    printf("%d\n",q3(str, 'a', 0) == 3);
+    printf("%d\n",q3(str, 'b', 0) == 0);
+    printf("%d\n",q3(str, 'l', 1) == 0);
+    printf("%d\n",q3(str, 'l', 0) == 1);
+    printf("%d\n",q3(str, 'L', 0) == 1);
 
     strcpy(str,"Letícia, signifiCa fEliCIdADE");
     printf("%d\n",q3(str, 'c', 0) == 3);

@@ -182,6 +182,13 @@ int validarData(int dia, int mes, int ano) {
   return 1;
 }
 
+int bissexto(int ano){
+  if(((ano % 4 == 0) && (ano % 100 != 0)) || (ano % 400 == 0)){
+    return 1;
+  }
+  return 0;
+}
+
 int QuantDias(int mes, int ano) {
   switch (mes) {
     case 1:
@@ -198,7 +205,7 @@ int QuantDias(int mes, int ano) {
     case 11:
       return 30;
     case 2:{
-      if (((ano % 4 == 0) && (ano % 100 != 0)) || (ano % 400 == 0)) {
+      if (bissexto(ano)) {
         return 29;
       } else {
         return 28;
@@ -246,10 +253,8 @@ DiasMesesAnos q2(char datainicial[], char datafinal[]) {
     dma.retorno = 1;
     int data1 =  QuantDiasAll(dma1.iMes, dma1.iAno) + dma1.iDia;
     data1 += dma1.iAno * 365;
-    //data1 += QuantDias(dma1.iMes, dma1.iAno) == 29 ? 1:0;
     int data2 =  QuantDiasAll(dma2.iMes, dma2.iAno) + dma2.iDia;
     data2 += dma2.iAno * 365;    
-    //data2 += QuantDias(dma2.iMes, dma2.iAno) == 29 ? 1:0;
     int data = data2 - data1;
     data +=  QuantDiasAll(dma1.iMes, dma1.iAno) == QuantDiasAll(dma2.iMes, dma2.iAno) ? 1:0;
     dma.qtdAnos  = data/365;
@@ -357,7 +362,6 @@ int Buscar(char *strTexto, char *strBusca, int posicoes[30]) {
           break;
       }
       if (strlen(strBusca) == l) {
-        c = acento/2;
         qtdOcorrencias++;
         posicoes[index] = i + 1;
         index++;
