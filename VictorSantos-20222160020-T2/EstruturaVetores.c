@@ -454,14 +454,14 @@ Retorno
 */
 void destruirListaEncadeadaComCabecote(No **inicio) 
 {  
-  //printf("(%p)", i);
-  No *next = NULL;
-  for(No *i = *inicio; i != NULL ; i = next){
-    next = i->prox;
-    free(i);    
+  No *i = *inicio;
+  
+  while(i){
+    No *next = i->prox;
+    free(i);
+    i = next;
   }
   *inicio = NULL;
-   
 }
 
 /*
